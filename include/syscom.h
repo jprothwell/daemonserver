@@ -12,4 +12,9 @@ const char* READ_DONE = "read data in sm done";
 const char* SHM_ID = "ID";
 const char* SHM_ID_ELEMENT = "shareID";
 
+const int ADD_ELEMENT_FAILED = 1;
+const int ADD_ELEMENT_SUCCESS = 2;
+const int ADD_ATTR_SUCCESS = 3;
+const int ADD_ATTR_FAILED = 4;
+
 #endif

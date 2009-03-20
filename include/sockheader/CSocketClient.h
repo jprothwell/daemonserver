@@ -11,6 +11,7 @@ public:
     virtual ~CSocketClient();
 
     bool connectToServer();
+    int recvData( char* buf, int bufszie );
     int sendData( char* buf, int bufSize );
 
 private:

@@ -792,6 +792,7 @@ const char* TiXmlDocument::Parse( const char* p, TiXmlParsingData* prevData, TiX
 	}
 
 	// All is well.
+    //printf("parse the string is ok\n");
 	return p;
 }
 

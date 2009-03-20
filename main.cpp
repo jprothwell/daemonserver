@@ -1,6 +1,3 @@
-//
-//this is the test for the daemon server using the thread pool, socket and run as the daemon
-//
 #include "CInvoker.h"
 #include "CBuilder.h"
 
@@ -8,6 +5,9 @@
 
 #include "CShm.h"
 #include "syscom.h"
+
+#include "stdio.h"
+#include "stdlib.h"
 
 #include <iostream>
 #include <memory>
@@ -35,37 +35,107 @@ void createXML()
 	strcpy( XML, "<?xml version=\"1.0\" standalone=\"no\" ?>\n" );
 }
 
-void addAttr( const string elm, const string attr, const int value )
+int addAttr( const string elm, const string attr, const int value )
 {
+    LOGMAIN("begin add attr  : "<<elm);
 	TiXmlDocument doc;
-	doc.Parse( XML );
+	const char* ret = doc.Parse( XML );
+    if( 0==ret )
+    {
+        LOGMAIN("doc parse failed");
+    }
+    LOGMAIN("after parse the XML in addattr");
 	TiXmlNode *pNode = doc.FirstChild( elm );
+    LOGMAIN("After get the elm : "<<elm<<"  the node:"<<pNode);
 	TiXmlElement *pElm = pNode->ToElement();
+    LOGMAIN("After get the elm");
 	if( NULL!=pElm )
 	{
 		pElm->SetAttribute( attr, value );
 	}
-#ifdef DEBUG_MAIN
-	doc.Print();
-#endif
 
+///////////////////////////////
+    LOGMAIN("before add the file size : "<<strlen(XML) );
+    FILE* pFile = fopen( "/tmp/sharedinfo.txt", "w" );
+    if( NULL==pFile )
+    {
+        fputs( "Shared dump file error ", stderr );
+        return ADD_ATTR_FAILED;
+    }
+    else
+    {
+        doc.Print( pFile, 0 );
+        fclose( pFile );
+        pFile = fopen( "/tmp/sharedinfo.txt", "r" );
+        fseek( pFile, 0, SEEK_END );
+        int fSize = ftell( pFile );
+        rewind( pFile );
+
+        int readSize = fread( XML, 1, fSize, pFile );
+        fclose( pFile );
+    }
+    LOGMAIN("after add the file size : "<<strlen(XML) );
+////////////////////////////////////
+
+#ifdef DEBUG_MAIN
+	doc.Print(); 
+    printf("attr XML : %s", XML);
+#endif
+    LOGMAIN("end add attr");
+
+    return ADD_ATTR_SUCCESS;
 }
 
-void addElement( const string elm )
+int addElement( const string elm )
 {
+    LOGMAIN("Begin add element");
 	TiXmlDocument doc;
 	doc.Parse( XML );
 	TiXmlElement addElm( elm );
+
+    TiXmlNode *pFirstNode = doc.FirstChild();
+    doc.InsertAfterChild( pFirstNode, addElm );
+
+/////////////////////////////////////
+    LOGMAIN("before add the file size : "<<strlen(XML) );
+    FILE* pFile = fopen( "/tmp/sharedinfo.txt", "w" );
+    if( NULL==pFile )
+    {
+        fputs( "Shared dump file error ", stderr );
+        return ADD_ELEMENT_FAILED;
+    }
+    else
+    {
+        doc.Print( pFile, 0 );
+        fclose( pFile );
+        pFile = fopen( "/tmp/sharedinfo.txt", "r" );
+        fseek( pFile, 0, SEEK_END );
+        int fSize = ftell( pFile );
+        rewind( pFile );
+        LOGMAIN("read file size : "<<fSize );
+
+        int readSize = fread( XML, 1, fSize, pFile );
+        fclose( pFile );
+    }
+    LOGMAIN("after add the file size : "<<strlen(XML) );
+/////////////////////////////////
+
 #ifdef DEBUG_MAIN
 	doc.Print();
+    printf("XML : %s\n", XML);
 #endif
+    LOGMAIN("End add element");
+
+    return ADD_ATTR_SUCCESS;
 }
 
 void writeXML_To_Shm()
 {
+    LOGMAIN("Begin write to shm");
 	CShm* pShm = getShm();
 	if( NULL!=pShm && -1!=pShm->getID() && NULL!=pShm->getAddr() )
 		strcpy( (char*)pShm->getAddr(), XML );
+    LOGMAIN("End write to shm");
 }
 
 struct recvJobStruct
@@ -78,8 +148,10 @@ struct recvJobStruct
 
 void doCommand( struct recvJobStruct* pJob ) 
 {
-	CShm* pShm = getShm();
+    LOGMAIN("Server :: doCommand");
+    CShm* pShm = getShm();
 	const string str( pJob->buf );
+    LOGMAIN("before the string compare");
 	if( GET_SM==str )
 	{
 		createXML();
@@ -90,10 +162,11 @@ void doCommand( struct recvJobStruct* pJob )
 			addAttr( SHM_ID_ELEMENT, SHM_ID, pShm->getID() );
 		
 		writeXML_To_Shm();
-
+        
 		char sendBuf[50];
 		memset( sendBuf, 0, 50 );
-		strcpy( sendBuf, WRITE_DONE );
+		//strcpy( sendBuf, WRITE_DONE );
+        sprintf( sendBuf, "%d", pShm->getID() );
 		int send = pJob->pServer->sendData( pJob->fd, sendBuf, 50 );
 		if( send>0 )
 		{
@@ -179,7 +252,13 @@ CShm* getShm()
 // create the share memory for the client and the server to communication
 	static CShm *gShm = NULL;
 	if( NULL==gShm )
-    	CShm* gShm = new CShm();
+    	gShm = new CShm();
+
+    LOGMAIN("after create the cshm");
+    if( NULL==gShm )
+    {
+        LOGMAIN("Create the CShm failed");
+    }
 
     if( -1==gShm->getID() )
     {
@@ -253,6 +332,7 @@ int main( int argv, char** argc )
     int i = 0;
     while(1)
     {
+       sleep( 5 );
        LOGMAIN("wait on the server");
        int ret = pSockServer->wait(); 
        if( -1!=ret )

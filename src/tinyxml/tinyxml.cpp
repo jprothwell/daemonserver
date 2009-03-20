@@ -339,12 +339,15 @@ bool TiXmlNode::RemoveChild( TiXmlNode* removeThis )
 
 const TiXmlNode* TiXmlNode::FirstChild( const char * _value ) const
 {
+    //printf(" get the first : %s\n", _value );
 	const TiXmlNode* node;
 	for ( node = firstChild; node; node = node->next )
 	{
+        //printf(" in comapre : %s \n", node->Value() );
 		if ( strcmp( node->Value(), _value ) == 0 )
 			return node;
 	}
+    //printf(" return 0 in Node\n");
 	return 0;
 }
 
@@ -1155,7 +1158,6 @@ void TiXmlDocument::Print( FILE* cfile, int depth ) const
 		fprintf( cfile, "\n" );
 	}
 }
-
 
 bool TiXmlDocument::Accept( TiXmlVisitor* visitor ) const
 {

@@ -42,3 +42,18 @@ int CSocketClient::sendData( char* buf, int bufSize )
 
     return ret;
 }
+
+int CSocketClient::recvData( char* buf, int bufsize )
+{
+    if( NULL==buf )
+        return 0;
+        
+    int ret = -1;
+    if( -1==(ret=recv( getSocketFD(), buf, bufsize, 0)) )
+    {
+        printf("Client recv data error!\n");
+        return -1;
+    }
+
+    return ret;
+}
