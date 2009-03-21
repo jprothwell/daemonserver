@@ -28,7 +28,10 @@ using namespace std;
 #define DEFAULT_PORT 9000
 
 CShm* getShm();
-
+//////////////////////////////////////////////
+// XML file operation
+// ///////////////////////////////////////////
+const char* SHARED_FILE = "./config/shareInfo.xml";
 static char XML[1024];
 void createXML()
 {
@@ -55,7 +58,6 @@ int addAttr( const string elm, const string attr, const int value )
 		pElm->SetAttribute( attr, value );
 	}
 
-///////////////////////////////
     LOGMAIN("before add the file size : "<<strlen(XML) );
     FILE* pFile = fopen( "/tmp/sharedinfo.txt", "w" );
     if( NULL==pFile )
@@ -76,7 +78,6 @@ int addAttr( const string elm, const string attr, const int value )
         fclose( pFile );
     }
     LOGMAIN("after add the file size : "<<strlen(XML) );
-////////////////////////////////////
 
 #ifdef DEBUG_MAIN
 	doc.Print(); 
@@ -97,7 +98,6 @@ int addElement( const string elm )
     TiXmlNode *pFirstNode = doc.FirstChild();
     doc.InsertAfterChild( pFirstNode, addElm );
 
-/////////////////////////////////////
     LOGMAIN("before add the file size : "<<strlen(XML) );
     FILE* pFile = fopen( "/tmp/sharedinfo.txt", "w" );
     if( NULL==pFile )
@@ -119,7 +119,6 @@ int addElement( const string elm )
         fclose( pFile );
     }
     LOGMAIN("after add the file size : "<<strlen(XML) );
-/////////////////////////////////
 
 #ifdef DEBUG_MAIN
 	doc.Print();
@@ -138,6 +137,9 @@ void writeXML_To_Shm()
 		strcpy( (char*)pShm->getAddr(), XML );
     LOGMAIN("End write to shm");
 }
+///////////////////////////////////////////
+// end the XML opertion
+// ////////////////////////////////////////
 
 struct recvJobStruct
 {
