@@ -41,7 +41,8 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_libxmlcore_so_OBJECTS = tinystr.$(OBJEXT) tinyxml.$(OBJEXT) \
-	tinyxmlerror.$(OBJEXT) tinyxmlparser.$(OBJEXT)
+	tinyxmlerror.$(OBJEXT) tinyxmlparser.$(OBJEXT) \
+	xml_op.$(OBJEXT)
 libxmlcore_so_OBJECTS = $(am_libxmlcore_so_OBJECTS)
 libxmlcore_so_LDADD = $(LDADD)
 libxmlcore_so_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -150,7 +151,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 INCLUDES = -I$(top_srcdir)/include/sockheader -I$(top_srcdir)/include/threadheader -I$(top_srcdir)/include/tinyxmlheader
-libxmlcore_so_SOURCES = tinystr.cpp  tinyxml.cpp  tinyxmlerror.cpp  tinyxmlparser.cpp
+libxmlcore_so_SOURCES = tinystr.cpp  tinyxml.cpp  tinyxmlerror.cpp  tinyxmlparser.cpp xml_op.cpp
 libxmlcore_so_LDFLAGS = -g -Wall -fpic -shared
 all: all-am
 
@@ -202,6 +203,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinyxml.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinyxmlerror.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinyxmlparser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml_op.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
