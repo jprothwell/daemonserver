@@ -44,7 +44,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
-am_daemonserver_OBJECTS = main.$(OBJEXT) operation.$(OBJEXT)
+am_daemonserver_OBJECTS = main.$(OBJEXT)
 daemonserver_OBJECTS = $(am_daemonserver_OBJECTS)
 daemonserver_DEPENDENCIES =
 daemonserver_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -174,7 +174,7 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 SUBDIRS = src/threadpool/ src/communication src/tinyxml client/
 INCLUDES = -I$(top_srcdir)/include/sockheader -I$(top_srcdir)/include/threadheader -I$(top_srcdir)/include/tinyxmlheader -I$(top_srcdir)/include
-daemonserver_SOURCES = main.cpp operation.cpp
+daemonserver_SOURCES = main.cpp
 daemonserver_LDADD = -L$(top_srcdir)/src/threadpool -L$(top_srcdir)/src/communication -L$(top_srcdir)/src/tinyxml
 daemonserver_LDFLAGS = -g -Wall 
 all: all-recursive
@@ -228,7 +228,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/operation.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

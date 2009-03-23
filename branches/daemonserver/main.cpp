@@ -23,8 +23,9 @@ using namespace std;
 #define LOGMAIN(msg)
 #endif
 
-#include "tinyxml.h"
-#define CONFIG_FILE "./config/set.xml"
+//#include "tinyxml.h"
+#include "xml_op.h"
+const string CONFIG_FILE( "./config/set.xml" );
 #define DEFAULT_PORT 9000
 
 CShm* getShm();
@@ -33,54 +34,32 @@ CShm* getShm();
 // ///////////////////////////////////////////
 const char* SHARED_FILE = "./config/shareInfo.xml";
 static char XML[1024];
+
+XML_op* getXML_op()
+{
+	static XML_op *pXML = NULL;
+	if( NULL==pXML )
+		pXML = new XML_op();
+	
+	return pXML;
+}
+
 void createXML()
 {
 	memset( XML, 0, 1024 );
-	strcpy( XML, "<?xml version=\"1.0\" standalone=\"no\" ?>\n" );
+	getXML_op();
 }
 
 int addAttr( const string elm, const string attr, const int value )
 {
     LOGMAIN("begin add attr  : "<<elm);
-	TiXmlDocument doc;
-	const char* ret = doc.Parse( XML );
-    if( 0==ret )
-    {
-        LOGMAIN("doc parse failed");
-    }
-    LOGMAIN("after parse the XML in addattr");
-	TiXmlNode *pNode = doc.FirstChild( elm );
-    LOGMAIN("After get the elm : "<<elm<<"  the node:"<<pNode);
-	TiXmlElement *pElm = pNode->ToElement();
-    LOGMAIN("After get the elm");
-	if( NULL!=pElm )
-	{
-		pElm->SetAttribute( attr, value );
-	}
+	if( false==getXML_op()->addAttr( elm, attr, value ) )
+		return ADD_ATTR_FAILED;
+		
 
-    LOGMAIN("before add the file size : "<<strlen(XML) );
-    FILE* pFile = fopen( "/tmp/sharedinfo.txt", "w" );
-    if( NULL==pFile )
-    {
-        fputs( "Shared dump file error ", stderr );
-        return ADD_ATTR_FAILED;
-    }
-    else
-    {
-        doc.Print( pFile, 0 );
-        fclose( pFile );
-        pFile = fopen( "/tmp/sharedinfo.txt", "r" );
-        fseek( pFile, 0, SEEK_END );
-        int fSize = ftell( pFile );
-        rewind( pFile );
-
-        int readSize = fread( XML, 1, fSize, pFile );
-        fclose( pFile );
-    }
-    LOGMAIN("after add the file size : "<<strlen(XML) );
-
-#ifdef DEBUG_MAIN
-	doc.Print(); 
+#ifdef DEBUG_MAIN 
+    //printf("attr XML : %s", XML);
+	getXML_op()->dumpXML( XML, 1024 );
     printf("attr XML : %s", XML);
 #endif
     LOGMAIN("end add attr");
@@ -91,42 +70,16 @@ int addAttr( const string elm, const string attr, const int value )
 int addElement( const string elm )
 {
     LOGMAIN("Begin add element");
-	TiXmlDocument doc;
-	doc.Parse( XML );
-	TiXmlElement addElm( elm );
-
-    TiXmlNode *pFirstNode = doc.FirstChild();
-    doc.InsertAfterChild( pFirstNode, addElm );
-
-    LOGMAIN("before add the file size : "<<strlen(XML) );
-    FILE* pFile = fopen( "/tmp/sharedinfo.txt", "w" );
-    if( NULL==pFile )
-    {
-        fputs( "Shared dump file error ", stderr );
-        return ADD_ELEMENT_FAILED;
-    }
-    else
-    {
-        doc.Print( pFile, 0 );
-        fclose( pFile );
-        pFile = fopen( "/tmp/sharedinfo.txt", "r" );
-        fseek( pFile, 0, SEEK_END );
-        int fSize = ftell( pFile );
-        rewind( pFile );
-        LOGMAIN("read file size : "<<fSize );
-
-        int readSize = fread( XML, 1, fSize, pFile );
-        fclose( pFile );
-    }
-    LOGMAIN("after add the file size : "<<strlen(XML) );
+	if( false==getXML_op()->addElm(elm) )
+		return ADD_ELEMENT_FAILED;
 
 #ifdef DEBUG_MAIN
-	doc.Print();
+	getXML_op()->dumpXML( XML, 1024 );
     printf("XML : %s\n", XML);
 #endif
     LOGMAIN("End add element");
 
-    return ADD_ATTR_SUCCESS;
+    return ADD_ELEMENT_SUCCESS;
 }
 
 void writeXML_To_Shm()
@@ -279,28 +232,12 @@ CShm* getShm()
 // end of the share memory init
 }
 
-short serverPort( const char* filePath )
+short serverPort( const string strFile )
 {
-
-    TiXmlDocument config( filePath );
-    if( false==config.LoadFile())
-    {
-        LOGMAIN("load setting file failed");
-        return DEFAULT_PORT;
-    }
-
-    TiXmlNode *pNode = config.FirstChild( "ServerSetting" );
-    if( NULL==pNode )
-        return -1;
-    TiXmlElement *pElm = pNode->ToElement();
-    if( NULL==pElm )
-        return -1;
-
-    int ret = -1;
-    if( TIXML_SUCCESS==pElm->QueryIntAttribute("port", &ret) )
-    {
-        return static_cast<short>(ret);
-    }
+	XML_op xml( strFile );
+	int port = -1;
+	if( true==xml.getAttrValue( "ServerSetting", "port", port ) )
+		return static_cast<short>(port);
 
     return -1;
 }
