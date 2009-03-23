@@ -2,4 +2,9 @@
 
 cd
 cd Desktop
-ls -la
+ls -la > desktop
+
+git add desktop
+git commit -a -m 'desktop'
+
+git-svn dcommit
