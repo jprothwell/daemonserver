@@ -1,0 +1,13 @@
+total 40
+lrwxrwxrwx 1 michael michael   28 2009-03-18 16:44 code -> /home/michael/Desktop/mycode
+drwxr-xr-x 5 michael michael 4096 2009-03-23 16:09 Desktop
+-rw-r--r-- 1 michael michael    5 2009-03-18 11:21 dic.txt
+drwxr-xr-x 2 michael michael 4096 2009-03-17 19:32 Documents
+lrwxrwxrwx 1 michael michael   26 2009-03-17 19:20 Examples -> /usr/share/example-content
+-rw-r--r-- 1 michael michael 1942 2008-05-01 14:04 local.zip
+drwxr-xr-x 2 michael michael 4096 2009-03-17 19:32 Music
+drwxr-xr-x 2 michael michael 4096 2009-03-17 19:32 Pictures
+drwxr-xr-x 2 michael michael 4096 2009-03-17 19:32 Public
+drwxr-xr-x 6 michael michael 4096 2009-03-17 17:04 Source Insight
+drwxr-xr-x 2 michael michael 4096 2009-03-17 19:32 Templates
+drwxr-xr-x 2 michael michael 4096 2009-03-17 19:32 Videos
