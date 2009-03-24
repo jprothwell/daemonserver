@@ -63,12 +63,13 @@ CThread::~CThread()
 
 bool CThread::dispatchEvent( const Event &event )
 {
+	LOG_T("receive the event"<<event.getEvent());
 	for( int i=0; i<State_Count; i++ )
 	{
+        LOG_T("====CThread::compare the event====");
 		if( (state_trans_table[i].curState==mCurState)&&(event.isEvent(state_trans_table[i].eventID)) )
 		{
 
-			LOG_T("receive the event"<<event.getEvent());
 			bool fun_op = false;
 			if( NULL!=state_trans_table[i].fun )	
 			{
@@ -76,6 +77,10 @@ bool CThread::dispatchEvent( const Event &event )
 				bool (CThread::*p)() = state_trans_table[i].fun;
 				fun_op = (this->*p)();
 			}
+            else
+            {
+                fun_op = true;
+            }
 
 			if( true==fun_op )
 			{
@@ -86,6 +91,7 @@ bool CThread::dispatchEvent( const Event &event )
 
 		continue;
 	}
+    LOG_T("+++ the event is not handle by the state machine ++++++");
 
 	return false;
 }

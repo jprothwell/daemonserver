@@ -146,7 +146,13 @@ int main( int argv, char** argc )
     {
         LOGMAIN("recv the data from server ok"<<recvBuf);
     }
+    else
+    {
+        LOGMAIN("recv the data error!");
+        exit( EXIT_FAILURE );
+    }
 
+    sleep(5);
     int shareID = atoi( recvBuf );
     CShm* pShm = new CShm( shareID, 0 );
     if( NULL!=pShm )
