@@ -72,6 +72,7 @@ int addElement( const string elm )
 	if( false==getXML_op()->addElm(elm) )
 		return ADD_ELEMENT_FAILED;
 
+    LOGMAIN("after add the element");
 #ifdef DEBUG_MAIN
 	getXML_op()->dumpXML( XML, 1024 );
     printf("XML : %s\n", XML);

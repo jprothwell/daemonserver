@@ -35,7 +35,7 @@ int CCommandJob::excute( CJob *pJob )
     else
     {
         INTERJOB jobId = mpThreadManager->newWork( pJob->workProcess, pJob->workParm );
-        LOG("CCommandJob::start the work success="<<jobInfo->jobID);
+        //LOG("CCommandJob::start the work success="<<jobInfo->jobID);
         if( jobId>0 )
         {
             mJobMap[pJob] = new InterJobInfo();
