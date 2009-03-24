@@ -1,11 +1,52 @@
 #include "CThread.h"
 #include "CThreadPrivate.h"
 
+typedef EventID EVENT_ID;
+typedef struct
+{
+	StateFlags curState;
+	EVENT_ID   eventID;
+	StateFlags nextState;
+	bool (CThread::*fun)();
+}State_Trans;
+
+enum State_Trans_Index
+{
+	BEGIN = 0,
+	IDLE_TO_RUN = 0,
+	RUN_TO_STOP,
+	STOP_TO_RUN,
+	RUN_TO_CANCLE,
+	RUN_TO_JOBDONE,
+	NG_TO_IDLE,
+	END
+};
+
+State_Trans state_trans_table[] = 
+{
+	{IDLE, START_EVENT, RUNNING, NULL},
+	{RUNNING, STOP_EVENT, STOPED, NULL},
+	{STOPED, RUN_EVENT, RUNNING, NULL},
+	{RUNNING, CANCEL_EVENT, CANCEL, NULL},
+	{RUNNING, JOBDONE_EVENT, JOBDONE, NULL},
+	{NG, IDLE_EVENT, IDLE, NULL}
+};
+
+#define State_Count (sizeof(state_trans_table)/sizeof(state_trans_table[0]))
 
 CThread::CThread( TFlags f )
 	: mpThreadPrivate( new CThreadPrivate() )
 {
     mThreadFlags = f;
+	mCurState = NG;
+	state_trans_table[IDLE_TO_RUN].fun = &CThread::start;
+	state_trans_table[RUN_TO_STOP].fun = &CThread::stop;
+	state_trans_table[STOP_TO_RUN].fun = &CThread::resume;
+	state_trans_table[RUN_TO_CANCLE].fun = &CThread::cancel;
+	state_trans_table[RUN_TO_JOBDONE].fun = &CThread::jobDone;
+	state_trans_table[NG_TO_IDLE].fun = NULL;
+
+
     if( THREAD_CREATE_IDLE & f )
         mpThreadPrivate->init( this );
 }
@@ -20,6 +61,44 @@ CThread::~CThread()
     LOG_T("delete data");
 }
 
+bool CThread::dispatchEvent( const Event &event )
+{
+	for( int i=0; i<State_Count; i++ )
+	{
+		if( (state_trans_table[i].curState==mCurState)&&(event.isEvent(state_trans_table[i].eventID)) )
+		{
+
+			LOG_T("receive the event"<<event.getEvent());
+			bool fun_op = false;
+			if( NULL!=state_trans_table[i].fun )	
+			{
+				LOG_T("invoke the event fun");
+				bool (CThread::*p)() = state_trans_table[i].fun;
+				fun_op = (this->*p)();
+			}
+
+			if( true==fun_op )
+			{
+				mCurState = state_trans_table[i].nextState;
+				return true;
+			}
+		}
+
+		continue;
+	}
+
+	return false;
+}
+
+StateEvent CThread::getState()
+{
+	StateEvent event;
+	event.setState( mCurState );
+
+	return event;
+}
+
+/////////////////////////////////////////////////////////
 bool CThread::start()
 {
     if( NULL==mpThreadPrivate.get() )
@@ -85,10 +164,11 @@ bool CThread::cancel()
 
 bool CThread::jobDone()
 {
-    if( NULL!=mpThreadPrivate.get() )
-        return mpThreadPrivate->isFinish();
+    //if( NULL!=mpThreadPrivate.get() )
+    //    return mpThreadPrivate->isFinish();
+	mCurState = JOBDONE;
 
-    return false;
+    return true;
 }
 
 void CThread::sleep( unsigned long secs )

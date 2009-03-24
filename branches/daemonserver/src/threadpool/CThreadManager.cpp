@@ -26,6 +26,7 @@ INTERJOB CThreadManager::newWork( WORK pWork, WORKPARM pWorkParm )
 {
     ThreadBase *pThread = mpIdlePool->popThread();
     INTERJOB retJobID = 0;
+	LOG("begin the thrad manager select work function");
     if( NULL!=pThread )
     {
         retJobID = excuteWork( pThread, pWork, pWorkParm );
@@ -52,7 +53,10 @@ bool CThreadManager::stopWork( INTERJOB jobID )
     ThreadBase *pThread = mpWorkPool->findThread( jobID );
     LOG("CThreadManger::stopWork get the thread from pool, thread:"<<pThread);
     if( NULL!=pThread )
-        pThread->stopThread();    
+	{
+		StopEvent event;
+        pThread->dispatchEvent( event );    
+	}
 
     return true;
 }
@@ -61,7 +65,10 @@ bool CThreadManager::resumeWork( INTERJOB jobID )
 {
     ThreadBase *pThread = mpWorkPool->findThread( jobID );
     if( NULL!=pThread )
-        pThread->resumeThread();    
+	{
+		RunEvent event;
+        pThread->dispatchEvent( event );    
+	}
 
     return false;
 }
@@ -71,7 +78,8 @@ bool CThreadManager::cancelWork( INTERJOB jobID )
     ThreadBase *pThread = mpWorkPool->findThread( jobID );
     if( NULL!=pThread )
     {
-        bool bClose = pThread->closeThread();
+		CancelEvent event;
+        bool bClose = pThread->dispatchEvent( event );
         if( true==bClose )
         {
             mpWorkPool->delThread( pThread );
@@ -89,7 +97,9 @@ INTERJOB CThreadManager::excuteWork( ThreadBase* pThread, WORK pWork, WORKPARM p
     LOG("CThreadManager::pWork : "<<pWork);
     pThread->setThreadWork( pWork );
     pThread->setThreadParm( pWorkParm );
-    bool bStart = pThread->startThread();
+	LOG("Begin the start event");
+	StartEvent event;
+    bool bStart = pThread->dispatchEvent( event );
     if( true==bStart )
     {
         mpIdlePool->delThread( pThread );

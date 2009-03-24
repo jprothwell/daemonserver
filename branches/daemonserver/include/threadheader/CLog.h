@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//#define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
 #define LOG(msg) cout<<msg<<endl;

@@ -42,6 +42,9 @@ bool CThreadPrivate::init( CThread* that )
         return false;
     }
     mbExist = true;
+	
+	IdleEvent event;
+	mpThread->dispatchEvent( event );
 
     return true;
 }
@@ -86,6 +89,11 @@ bool CThreadPrivate::forceWait()
         return true;
    else
         return false;
+}
+
+bool CThreadPrivate::dispatchEvent( Event &event )
+{
+	mpThread->dispatchEvent( event );
 }
 
 static pthread_once_t once_ctrl;
@@ -144,6 +152,8 @@ bool CThreadPrivate::internalRun( CThreadPrivate* t )
             t->mpThread->run();
             t->mbRunning = false;
             t->mbFinish = true;
+			JobDoneEvent event;
+			t->dispatchEvent( event );
         }
     }
     else if( THREAD_CREATE_RUN & t->mpThread->mThreadFlags )
@@ -157,6 +167,9 @@ bool CThreadPrivate::internalRun( CThreadPrivate* t )
     
     LOG_T("thread exit finish : "<<t->mbFinish);
     t->mbExist = false;
+	CancelEvent event;
+	t->dispatchEvent( event );
+
     return true;
 }
 
