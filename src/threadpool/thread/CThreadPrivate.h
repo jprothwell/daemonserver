@@ -7,6 +7,7 @@
 #include "threadtype.h"
 
 class CThread;
+class Event;
 
 class CThreadPrivate
 {
@@ -24,6 +25,7 @@ public:
     bool isWaiting(){ return mbWaiting; }
 
     static bool internalRun( CThreadPrivate* t );
+	bool dispatchEvent( Event &event );
 
 private:
     CMutexPrivate* mpMutex;

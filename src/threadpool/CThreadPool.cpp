@@ -74,7 +74,7 @@ ThreadBase* CThreadPool::getFirstIdleThread()
     ThreadStack::iterator it;
     for( it=mThreadPoolStack.begin(); it<mThreadPoolStack.end(); it++ )
     {
-        if( true==(*it)->jobDone() )
+        if( true==(*it)->getState().isState(JOBDONE) )
             return (*it);
     }
 

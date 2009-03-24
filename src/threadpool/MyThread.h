@@ -21,23 +21,6 @@ public:
     {
     }
 
-    bool startThread()
-    {
-        return CThread::start();
-    }
-    bool stopThread()
-    {
-        return CThread::stop();
-    }
-    bool resumeThread()
-    {
-        return CThread::resume();
-    }
-    bool closeThread()
-    {
-        return CThread::cancel();
-    }
-
     void setThreadWork( WORK pWork ){ mpThreadWork = pWork; }
     void setThreadParm( void *pThreadParm ){ mpThreadParm = pThreadParm; }
 
