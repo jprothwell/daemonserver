@@ -1,8 +1,8 @@
 #ifndef  _INVOKER_H_
 #define _INVOKER_H_
 
-#include "CCommand.h"
-#include "CJob.h"
+class CCommand;
+class CJob;
 
 class CInvoker
 {

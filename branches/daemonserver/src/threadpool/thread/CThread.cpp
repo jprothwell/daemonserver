@@ -1,5 +1,6 @@
 #include "CThread.h"
 #include "CThreadPrivate.h"
+#include "debug.h"
 
 typedef EventID EVENT_ID;
 typedef struct
@@ -55,25 +56,25 @@ CThread::~CThread()
 {
     if( true==mpThreadPrivate->isRunning() || true==mpThreadPrivate->isWaiting() )
     {
-        LOG_T("CThread::thread exit");
+        LOG_THREAD("CThread::thread exit");
         mpThreadPrivate->exit();
     }
-    LOG_T("delete data");
+    LOG_THREAD("delete data");
 }
 
 bool CThread::dispatchEvent( const Event &event )
 {
-	LOG_T("receive the event"<<event.getEvent());
+	LOG_THREAD("receive the event"<<event.getEvent());
 	for( int i=0; i<State_Count; i++ )
 	{
-        LOG_T("====CThread::compare the event====");
+        LOG_THREAD("====CThread::compare the event====");
 		if( (state_trans_table[i].curState==mCurState)&&(event.isEvent(state_trans_table[i].eventID)) )
 		{
 
 			bool fun_op = false;
 			if( NULL!=state_trans_table[i].fun )	
 			{
-				LOG_T("invoke the event fun");
+				LOG_THREAD("invoke the event fun");
 				bool (CThread::*p)() = state_trans_table[i].fun;
 				fun_op = (this->*p)();
 			}
@@ -91,7 +92,7 @@ bool CThread::dispatchEvent( const Event &event )
 
 		continue;
 	}
-    LOG_T("+++ the event is not handle by the state machine ++++++");
+    LOG_THREAD("+++ the event is not handle by the state machine ++++++");
 
 	return false;
 }
@@ -112,12 +113,12 @@ bool CThread::start()
 
     if( THREAD_CREATE_RUN & mThreadFlags )
     {
-        LOG_T("init the thread");
+        LOG_THREAD("init the thread");
         return mpThreadPrivate->init( this );
     }
     else if( THREAD_CREATE_IDLE & mThreadFlags )
     {
-        LOG_T("wakeup the thread");
+        LOG_THREAD("wakeup the thread");
         return mpThreadPrivate->wakeUp();
     }
     

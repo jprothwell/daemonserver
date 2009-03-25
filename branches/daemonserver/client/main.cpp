@@ -5,7 +5,7 @@
 #include "CInvoker.h"
 #include "CBuilder.h""
 
-#include "CLog.h"
+//#include "CLog.h"
 //#include "CThread.h"
 
 #include "CSocketClient.h"

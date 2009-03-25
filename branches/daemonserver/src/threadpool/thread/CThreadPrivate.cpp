@@ -1,6 +1,8 @@
 #include "CThread.h"
 #include "CThreadPrivate.h"
 
+#include "debug.h"
+
 extern "C" { static void* start_thread( void* t ); }
 
 CThreadPrivate::CThreadPrivate()
@@ -57,7 +59,7 @@ bool CThreadPrivate::wakeUp()
     if( false==mbWaiting ) 
         return true;
 
-    LOG_T("CThreadPrivate::wakeUp()");
+    LOG_THREAD("CThreadPrivate::wakeUp()");
     mpMutex->lock();
     mpCond->wakeUp();
     mpMutex->unlock();
@@ -76,7 +78,7 @@ bool CThreadPrivate::exit()
 
 bool CThreadPrivate::forceWait()
 {
-    LOG_T("CThreadPrivate::forceWait()");
+    LOG_THREAD("CThreadPrivate::forceWait()");
     if( false==mbExist )
         return false;
 
@@ -115,7 +117,7 @@ extern "C"
 {
     static void thread_suspend( int a )
     {
-        LOG_T(" thread_suspend");
+        LOG_THREAD(" thread_suspend");
         CMutexPrivate *pMutex = static_cast<CMutexPrivate*>(pthread_getspecific( mutex_key ));
         CCondPrivate *pCond = static_cast<CCondPrivate*>(pthread_getspecific( cond_key ));
         bool *pWaiting = static_cast<bool*>(pthread_getspecific( waiting_key ));
@@ -140,7 +142,7 @@ bool CThreadPrivate::internalRun( CThreadPrivate* t )
     {
         while( 1 )
         {
-            LOG_T("internal thread before wait");
+            LOG_THREAD("internal thread before wait");
             t->mpMutex->lock();
             t->mbWaiting = true;
             t->mpCond->wait();
@@ -165,7 +167,7 @@ bool CThreadPrivate::internalRun( CThreadPrivate* t )
         t->mbFinish = true;
     }
     
-    LOG_T("thread exit finish : "<<t->mbFinish);
+    LOG_THREAD("thread exit finish : "<<t->mbFinish);
     t->mbExist = false;
 	CancelEvent event;
 	t->dispatchEvent( event );

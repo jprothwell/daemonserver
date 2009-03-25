@@ -3,6 +3,9 @@
 
 #include "threadtype.h"
 #include <memory>
+#include "debug.h"
+
+using namespace std;
 
 class CThreadPrivate;
 

@@ -1,5 +1,6 @@
 #include "CCommand.h"
-#include "CDefine.h"
+#include "tptypes.h"
+#include "CJob.h"
 
 class CJob;
 

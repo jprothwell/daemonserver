@@ -5,7 +5,7 @@
 #include "CCommand.h"
 #include "CThreadManager.h"
 #include "CJob.h"
-#include "CDefine.h"
+#include "tptypes.h"
 
 using namespace std;
 

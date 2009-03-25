@@ -1,4 +1,5 @@
 #include "CInvoker.h"
+#include "CJob.h"
 #include "CBuilder.h"
 
 #include "CSocketServer.h"

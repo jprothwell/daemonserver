@@ -1,7 +1,7 @@
 #ifndef  _CTHREADMANAGER_H_
 #define _CTHREADMANAGER_H_
 
-#include "CDefine.h"
+#include "tptypes.h"
 
 class CThreadPool;
 

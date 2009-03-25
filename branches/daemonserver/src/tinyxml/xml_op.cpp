@@ -2,16 +2,9 @@
 #include "tinyxml.h"
 #include <fstream>
 #include <iostream>
+#include "debug.h"
 
 using namespace std;
-
-//#define DEBUG_XML
-
-#ifdef DEBUG_XML
-#define LOGXML(msg) do{ cout<<msg<<endl; }while(0)
-#else
-#define LOGXML(msg)
-#endif
 
 typedef TiXmlNode Node;
 typedef TiXmlElement Element;
@@ -63,7 +56,7 @@ bool XML_op::getAttrValue( const string &elm, const string &attr, int &value )
     if( NULL==pNode )
     {
         mStatus = ELEMENT_NOT_EXIST;
-		LOGXML("getAttrValue::get node failed");
+		LOG_XML("getAttrValue::get node failed");
         return false;
     }
     
@@ -71,7 +64,7 @@ bool XML_op::getAttrValue( const string &elm, const string &attr, int &value )
     if( NULL==pElm )
     {
         mStatus = ELEMENT_NOT_EXIST;
-		LOGXML("getAttrValue::to element failed");
+		LOG_XML("getAttrValue::to element failed");
         return false;
     }
 
@@ -79,7 +72,7 @@ bool XML_op::getAttrValue( const string &elm, const string &attr, int &value )
     if( TIXML_SUCCESS!=res )
     {
         mStatus = ATTR_NOT_EXIST;
-		LOGXML("getAttrValue::get int attr failed");
+		LOG_XML("getAttrValue::get int attr failed");
         return false;
     }
 	mStatus = ATTR_OK;

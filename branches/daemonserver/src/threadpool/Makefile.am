@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS=foreign
 
-INCLUDES = -I$(top_srcdir)/include/sockheader -I$(top_srcdir)/include/threadheader -I$(top_srcdir)/include/tinyxmlheader -I$(top_srcdir)/src/threadpool/thread
+INCLUDES = -I$(top_srcdir)/include/sockheader -I$(top_srcdir)/include/threadheader -I$(top_srcdir)/include/tinyxmlheader -I$(top_srcdir)/src/threadpool/thread -I$(top_srcdir)/src/threadpool
 
 noinst_PROGRAMS = libthreadpool.so
 libthreadpool_so_SOURCES = CBuilder.cpp \

@@ -11,13 +11,4 @@ enum ThreadCreateAttr
 
 typedef unsigned int TFlags;
 
-#define DEBUG_THREAD
-#ifdef DEBUG_THREAD
-    #include <iostream>
-    using namespace std;
-    #define LOG_T(msg)  cout<<msg<<endl;
-#else
-    #define LOG_T(msg)
-#endif
-
 #endif
