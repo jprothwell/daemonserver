@@ -1,17 +1,17 @@
 #include "CCommandJob.h"
 #include "CThreadManager.h"
-#include "CLog.h"
+#include "debug.h"
 
 CCommandJob::CCommandJob( CThreadManager *pThreadManager )
     :   CCommand() ,
         mpThreadManager( pThreadManager )
 {
-    LOG("Create the Command Job object");
+    LOG_TP("Create the Command Job object");
 }
 
 CCommandJob::~CCommandJob()
 {
-    LOG("Destory the Command Job");
+    LOG_TP("Destory the Command Job");
     JobMap::iterator it;
     for( it=mJobMap.begin(); it!=mJobMap.end(); ++it )
     {
@@ -29,13 +29,13 @@ int CCommandJob::excute( CJob *pJob )
     InterJobInfo* jobInfo = mJobMap[pJob];
     if( jobInfo>0 )
     {
-        LOG("The job is exist!");
+        LOG_TP("The job is exist!");
         return JOB_EXIST;
     }
     else
     {
         INTERJOB jobId = mpThreadManager->newWork( pJob->workProcess, pJob->workParm );
-        //LOG("CCommandJob::start the work success="<<jobInfo->jobID);
+        //LOG_TP("CCommandJob::start the work success="<<jobInfo->jobID);
         if( jobId>0 )
         {
             mJobMap[pJob] = new InterJobInfo();
@@ -61,7 +61,7 @@ int CCommandJob::cancel( CJob *pJob )
     bool ret = false;
     if( jobInfo>0 )
     {
-        LOG("cancel the job");
+        LOG_TP("cancel the job");
         ret = mpThreadManager->cancelWork( jobInfo->jobID );
     }
 
@@ -80,7 +80,7 @@ int CCommandJob::stop( CJob *pJob )
         return JOB_ERROR;
 
     InterJobInfo* jobInfo = mJobMap[pJob];
-    LOG("CommandJob::stop the job : "<<jobInfo->jobID);
+    LOG_TP("CommandJob::stop the job : "<<jobInfo->jobID);
     bool ret = false;
     if( jobInfo>0 )
         ret = mpThreadManager->stopWork( jobInfo->jobID );

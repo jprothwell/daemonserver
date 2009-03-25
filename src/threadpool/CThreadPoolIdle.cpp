@@ -1,6 +1,6 @@
 #include "CThreadPoolIdle.h"
 #include "MyThread.h"
-#include "CLog.h"
+#include "debug.h"
 
 CThreadPoolIdle::CThreadPoolIdle()
 {
@@ -21,6 +21,6 @@ CThreadPoolIdle::~CThreadPoolIdle()
 
 ThreadBase* CThreadPoolIdle::popThread()
 {
-    LOG("pop a thread from the idel pool");
+    LOG_TP("pop a thread from the idel pool");
     return CThreadPool::popThread();
 }

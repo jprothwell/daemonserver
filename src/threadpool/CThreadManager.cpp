@@ -2,7 +2,7 @@
 #include "CThreadPoolIdle.h"
 #include "CThreadPoolWork.h"
 #include "MyThread.h"
-#include "CLog.h"
+#include "debug.h"
 
 CThreadManager::CThreadManager()
 {
@@ -26,7 +26,7 @@ INTERJOB CThreadManager::newWork( WORK pWork, WORKPARM pWorkParm )
 {
     ThreadBase *pThread = mpIdlePool->popThread();
     INTERJOB retJobID = 0;
-	LOG("begin the thrad manager select work function");
+	LOG_TP("begin the thrad manager select work function");
     if( NULL!=pThread )
     {
         retJobID = excuteWork( pThread, pWork, pWorkParm );
@@ -51,7 +51,7 @@ INTERJOB CThreadManager::newWork( WORK pWork, WORKPARM pWorkParm )
 bool CThreadManager::stopWork( INTERJOB jobID )
 {
     ThreadBase *pThread = mpWorkPool->findThread( jobID );
-    LOG("CThreadManger::stopWork get the thread from pool, thread:"<<pThread);
+    LOG_TP("CThreadManger::stopWork get the thread from pool, thread:"<<pThread);
     if( NULL!=pThread )
 	{
 		StopEvent event;
@@ -94,10 +94,10 @@ bool CThreadManager::cancelWork( INTERJOB jobID )
 INTERJOB CThreadManager::excuteWork( ThreadBase* pThread, WORK pWork, WORKPARM pWorkParm )
 {
     INTERJOB retJobID = 0;
-    LOG("CThreadManager::pWork : "<<pWork);
+    LOG_TP("CThreadManager::pWork : "<<pWork);
     pThread->setThreadWork( pWork );
     pThread->setThreadParm( pWorkParm );
-	LOG("Begin the start event");
+	LOG_TP("Begin the start event");
 	StartEvent event;
     bool bStart = pThread->dispatchEvent( event );
     if( true==bStart )
@@ -105,7 +105,7 @@ INTERJOB CThreadManager::excuteWork( ThreadBase* pThread, WORK pWork, WORKPARM p
         mpIdlePool->delThread( pThread );
         mpWorkPool->addThread( pThread );
         retJobID = pThread;
-        LOG("CThreadManager::retJobID="<<retJobID);
+        LOG_TP("CThreadManager::retJobID="<<retJobID);
     }
 
     return retJobID;

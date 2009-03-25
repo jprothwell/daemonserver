@@ -2,7 +2,7 @@
 #define _MYTHREAD_H_
 
 #include "CThread.h"
-#include "CDefine.h"
+#include "tptypes.h"
 
 class MyThread : public CThread
 {

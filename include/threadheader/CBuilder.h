@@ -1,11 +1,9 @@
 #ifndef _CBUILDER_H_
 #define _CBUILDER_H_
 
-#include "CInvoker.h"
-#include "CCommand.h"
-#include "CCommandJob.h"
-#include "CThreadManager.h"
-#include "CDefine.h"
+class CInvoker;
+class CCommand;
+class CThreadManager;
 
 class CBuilder
 {

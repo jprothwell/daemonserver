@@ -1,7 +1,18 @@
 #ifndef  _CJOB_H_
 #define _CJOB_H_
 
-#include "CDefine.h"
+#include "tptypes.h"
+
+enum Job_status
+{
+    JOB_ERROR = 1,
+    JOB_READY,
+    JOB_EXIST,
+    JOB_NOT_EXIST,
+    JOB_RUNNING,
+    JOB_STOP,
+    JOB_DONE
+};
 
 class CJob
 {

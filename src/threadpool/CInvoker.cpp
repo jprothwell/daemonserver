@@ -1,10 +1,12 @@
 #include "CInvoker.h"
-#include "CLog.h"
+#include "CCommand.h"
+#include "CJob.h"
+#include "debug.h"
 
 CInvoker::CInvoker( CCommand *pCmd )
     : mpCommand( pCmd )
 {
-    LOG("create the Involer");
+    LOG_TP("create the Involer");
 }
 
 CInvoker::~CInvoker()

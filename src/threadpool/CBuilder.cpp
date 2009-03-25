@@ -1,4 +1,7 @@
 #include "CBuilder.h"
+#include "CCommandJob.h"
+#include "CInvoker.h"
+#include "CThreadManager.h"
 
 CBuilder::CBuilder()
 {

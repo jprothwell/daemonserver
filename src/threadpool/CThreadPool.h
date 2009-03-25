@@ -2,7 +2,7 @@
 #define _CTHREADPOOL_H_
 
 #include <vector>
-#include "CDefine.h"
+#include "tptypes.h"
 
 using namespace std;
 
