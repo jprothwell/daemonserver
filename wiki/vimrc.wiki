@@ -2,15 +2,19 @@
 syntax on
 
 set autoindent
+
 set smartindent
 
 set tabstop=4
+
 set shiftwidth=4
 
 set vb t_vb=
 
 set ruler
+
 set incsearch
+
 set ignorecase
 
 color murphy
