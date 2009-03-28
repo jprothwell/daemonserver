@@ -40,11 +40,9 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
-am_libxmlcore_so_OBJECTS = libxmlcore_so-tinystr.$(OBJEXT) \
-	libxmlcore_so-tinyxml.$(OBJEXT) \
-	libxmlcore_so-tinyxmlerror.$(OBJEXT) \
-	libxmlcore_so-tinyxmlparser.$(OBJEXT) \
-	libxmlcore_so-xml_op.$(OBJEXT)
+am_libxmlcore_so_OBJECTS = tinystr.$(OBJEXT) tinyxml.$(OBJEXT) \
+	tinyxmlerror.$(OBJEXT) tinyxmlparser.$(OBJEXT) \
+	xml_op.$(OBJEXT)
 libxmlcore_so_OBJECTS = $(am_libxmlcore_so_OBJECTS)
 libxmlcore_so_LDADD = $(LDADD)
 libxmlcore_so_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -155,8 +153,6 @@ AUTOMAKE_OPTIONS = foreign
 INCLUDES = -I$(top_srcdir)/include/sockheader -I$(top_srcdir)/include/threadheader -I$(top_srcdir)/include/tinyxmlheader
 libxmlcore_so_SOURCES = tinystr.cpp  tinyxml.cpp  tinyxmlerror.cpp  tinyxmlparser.cpp xml_op.cpp
 libxmlcore_so_LDFLAGS = -g -Wall -fpic -shared
-@DEBUG_XML_FALSE@libxmlcore_so_CPPFLAGS = 
-@DEBUG_XML_TRUE@libxmlcore_so_CPPFLAGS = -DDEBUG_XML
 all: all-am
 
 .SUFFIXES:
@@ -203,11 +199,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxmlcore_so-tinystr.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxmlcore_so-tinyxml.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxmlcore_so-tinyxmlerror.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxmlcore_so-tinyxmlparser.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxmlcore_so-xml_op.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinystr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinyxml.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinyxmlerror.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tinyxmlparser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml_op.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -222,76 +218,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-libxmlcore_so-tinystr.o: tinystr.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinystr.o -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinystr.Tpo -c -o libxmlcore_so-tinystr.o `test -f 'tinystr.cpp' || echo '$(srcdir)/'`tinystr.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinystr.Tpo $(DEPDIR)/libxmlcore_so-tinystr.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinystr.cpp' object='libxmlcore_so-tinystr.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinystr.o `test -f 'tinystr.cpp' || echo '$(srcdir)/'`tinystr.cpp
-
-libxmlcore_so-tinystr.obj: tinystr.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinystr.obj -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinystr.Tpo -c -o libxmlcore_so-tinystr.obj `if test -f 'tinystr.cpp'; then $(CYGPATH_W) 'tinystr.cpp'; else $(CYGPATH_W) '$(srcdir)/tinystr.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinystr.Tpo $(DEPDIR)/libxmlcore_so-tinystr.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinystr.cpp' object='libxmlcore_so-tinystr.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinystr.obj `if test -f 'tinystr.cpp'; then $(CYGPATH_W) 'tinystr.cpp'; else $(CYGPATH_W) '$(srcdir)/tinystr.cpp'; fi`
-
-libxmlcore_so-tinyxml.o: tinyxml.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinyxml.o -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinyxml.Tpo -c -o libxmlcore_so-tinyxml.o `test -f 'tinyxml.cpp' || echo '$(srcdir)/'`tinyxml.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinyxml.Tpo $(DEPDIR)/libxmlcore_so-tinyxml.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinyxml.cpp' object='libxmlcore_so-tinyxml.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinyxml.o `test -f 'tinyxml.cpp' || echo '$(srcdir)/'`tinyxml.cpp
-
-libxmlcore_so-tinyxml.obj: tinyxml.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinyxml.obj -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinyxml.Tpo -c -o libxmlcore_so-tinyxml.obj `if test -f 'tinyxml.cpp'; then $(CYGPATH_W) 'tinyxml.cpp'; else $(CYGPATH_W) '$(srcdir)/tinyxml.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinyxml.Tpo $(DEPDIR)/libxmlcore_so-tinyxml.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinyxml.cpp' object='libxmlcore_so-tinyxml.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinyxml.obj `if test -f 'tinyxml.cpp'; then $(CYGPATH_W) 'tinyxml.cpp'; else $(CYGPATH_W) '$(srcdir)/tinyxml.cpp'; fi`
-
-libxmlcore_so-tinyxmlerror.o: tinyxmlerror.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinyxmlerror.o -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinyxmlerror.Tpo -c -o libxmlcore_so-tinyxmlerror.o `test -f 'tinyxmlerror.cpp' || echo '$(srcdir)/'`tinyxmlerror.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinyxmlerror.Tpo $(DEPDIR)/libxmlcore_so-tinyxmlerror.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinyxmlerror.cpp' object='libxmlcore_so-tinyxmlerror.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinyxmlerror.o `test -f 'tinyxmlerror.cpp' || echo '$(srcdir)/'`tinyxmlerror.cpp
-
-libxmlcore_so-tinyxmlerror.obj: tinyxmlerror.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinyxmlerror.obj -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinyxmlerror.Tpo -c -o libxmlcore_so-tinyxmlerror.obj `if test -f 'tinyxmlerror.cpp'; then $(CYGPATH_W) 'tinyxmlerror.cpp'; else $(CYGPATH_W) '$(srcdir)/tinyxmlerror.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinyxmlerror.Tpo $(DEPDIR)/libxmlcore_so-tinyxmlerror.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinyxmlerror.cpp' object='libxmlcore_so-tinyxmlerror.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinyxmlerror.obj `if test -f 'tinyxmlerror.cpp'; then $(CYGPATH_W) 'tinyxmlerror.cpp'; else $(CYGPATH_W) '$(srcdir)/tinyxmlerror.cpp'; fi`
-
-libxmlcore_so-tinyxmlparser.o: tinyxmlparser.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinyxmlparser.o -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinyxmlparser.Tpo -c -o libxmlcore_so-tinyxmlparser.o `test -f 'tinyxmlparser.cpp' || echo '$(srcdir)/'`tinyxmlparser.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinyxmlparser.Tpo $(DEPDIR)/libxmlcore_so-tinyxmlparser.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinyxmlparser.cpp' object='libxmlcore_so-tinyxmlparser.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinyxmlparser.o `test -f 'tinyxmlparser.cpp' || echo '$(srcdir)/'`tinyxmlparser.cpp
-
-libxmlcore_so-tinyxmlparser.obj: tinyxmlparser.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-tinyxmlparser.obj -MD -MP -MF $(DEPDIR)/libxmlcore_so-tinyxmlparser.Tpo -c -o libxmlcore_so-tinyxmlparser.obj `if test -f 'tinyxmlparser.cpp'; then $(CYGPATH_W) 'tinyxmlparser.cpp'; else $(CYGPATH_W) '$(srcdir)/tinyxmlparser.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-tinyxmlparser.Tpo $(DEPDIR)/libxmlcore_so-tinyxmlparser.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='tinyxmlparser.cpp' object='libxmlcore_so-tinyxmlparser.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-tinyxmlparser.obj `if test -f 'tinyxmlparser.cpp'; then $(CYGPATH_W) 'tinyxmlparser.cpp'; else $(CYGPATH_W) '$(srcdir)/tinyxmlparser.cpp'; fi`
-
-libxmlcore_so-xml_op.o: xml_op.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-xml_op.o -MD -MP -MF $(DEPDIR)/libxmlcore_so-xml_op.Tpo -c -o libxmlcore_so-xml_op.o `test -f 'xml_op.cpp' || echo '$(srcdir)/'`xml_op.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-xml_op.Tpo $(DEPDIR)/libxmlcore_so-xml_op.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='xml_op.cpp' object='libxmlcore_so-xml_op.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-xml_op.o `test -f 'xml_op.cpp' || echo '$(srcdir)/'`xml_op.cpp
-
-libxmlcore_so-xml_op.obj: xml_op.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libxmlcore_so-xml_op.obj -MD -MP -MF $(DEPDIR)/libxmlcore_so-xml_op.Tpo -c -o libxmlcore_so-xml_op.obj `if test -f 'xml_op.cpp'; then $(CYGPATH_W) 'xml_op.cpp'; else $(CYGPATH_W) '$(srcdir)/xml_op.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libxmlcore_so-xml_op.Tpo $(DEPDIR)/libxmlcore_so-xml_op.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='xml_op.cpp' object='libxmlcore_so-xml_op.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libxmlcore_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libxmlcore_so-xml_op.obj `if test -f 'xml_op.cpp'; then $(CYGPATH_W) 'xml_op.cpp'; else $(CYGPATH_W) '$(srcdir)/xml_op.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

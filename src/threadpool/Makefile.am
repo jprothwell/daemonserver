@@ -26,12 +26,5 @@ libthreadpool_so_SOURCES = CBuilder.cpp \
 	thread/CThreadPrivate.cpp \
 	thread/CMutexPrivate.h \
 	thread/CThreadPrivate.h
-libthreadpool_so_LDFLAGS = -g -Wall -fpic -shared 
-
-if DEBUG_THREAD
-libthreadpool_so_CPPFLAGS = -DDEBUG_THREAD -DDEBUG_THREAD_POOL
-else
-libthreadpool_so_CPPFLAGS =
-endif
-
+libthreadpool_so_LDFLAGS = -g -Wall -fpic -shared
 LIBS = -lpthread

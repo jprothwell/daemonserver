@@ -1,7 +1,7 @@
 #ifndef _DEBUG_THREAD_POOL_H_
 #define _DEBUG_THREAD_POOL_H_
 
-//#define DEBUG_THREAD_POOL
+#define DEBUG_THREAD_POOL
 
 #ifdef DEBUG_THREAD_POOL
 	#include <iostream>

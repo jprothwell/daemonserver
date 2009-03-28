@@ -17,7 +17,7 @@
 #include <iostream>
 using namespace std;
 
-//#define DEBUG_MAIN
+#define DEBUG_MAIN
 
 #ifdef DEBUG_MAIN
 #define LOGMAIN(msg) cout<<msg<<endl;
