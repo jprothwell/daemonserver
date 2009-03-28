@@ -442,60 +442,90 @@ m4trace:configure.in:27: -1- AC_DEFINE_TRACE_LITERAL([HAVE_PTRDIFF_T])
 m4trace:configure.in:27: -1- m4_pattern_allow([^HAVE_PTRDIFF_T$])
 m4trace:configure.in:27: -1- AH_OUTPUT([HAVE_PTRDIFF_T], [/* Define to 1 if the system has the type `ptrdiff_t\'. */
 #undef HAVE_PTRDIFF_T])
-m4trace:configure.in:30: -1- AC_FUNC_SELECT_ARGTYPES
-m4trace:configure.in:30: -1- AC_CHECK_HEADERS([sys/select.h sys/socket.h])
-m4trace:configure.in:30: -1- AH_OUTPUT([HAVE_SYS_SELECT_H], [/* Define to 1 if you have the <sys/select.h> header file. */
+m4trace:configure.in:37: -1- AM_CONDITIONAL([DEBUG_MAIN], [test "$debug" = "true"])
+m4trace:configure.in:37: -1- AC_PREREQ([2.52])
+m4trace:configure.in:37: -1- AC_SUBST([DEBUG_MAIN_TRUE])
+m4trace:configure.in:37: -1- AC_SUBST_TRACE([DEBUG_MAIN_TRUE])
+m4trace:configure.in:37: -1- m4_pattern_allow([^DEBUG_MAIN_TRUE$])
+m4trace:configure.in:37: -1- AC_SUBST([DEBUG_MAIN_FALSE])
+m4trace:configure.in:37: -1- AC_SUBST_TRACE([DEBUG_MAIN_FALSE])
+m4trace:configure.in:37: -1- m4_pattern_allow([^DEBUG_MAIN_FALSE$])
+m4trace:configure.in:37: -1- _AM_SUBST_NOTMAKE([DEBUG_MAIN_TRUE])
+m4trace:configure.in:37: -1- _AM_SUBST_NOTMAKE([DEBUG_MAIN_FALSE])
+m4trace:configure.in:38: -1- AM_CONDITIONAL([DEBUG_THREAD], [test "$debug" = "true"])
+m4trace:configure.in:38: -1- AC_PREREQ([2.52])
+m4trace:configure.in:38: -1- AC_SUBST([DEBUG_THREAD_TRUE])
+m4trace:configure.in:38: -1- AC_SUBST_TRACE([DEBUG_THREAD_TRUE])
+m4trace:configure.in:38: -1- m4_pattern_allow([^DEBUG_THREAD_TRUE$])
+m4trace:configure.in:38: -1- AC_SUBST([DEBUG_THREAD_FALSE])
+m4trace:configure.in:38: -1- AC_SUBST_TRACE([DEBUG_THREAD_FALSE])
+m4trace:configure.in:38: -1- m4_pattern_allow([^DEBUG_THREAD_FALSE$])
+m4trace:configure.in:38: -1- _AM_SUBST_NOTMAKE([DEBUG_THREAD_TRUE])
+m4trace:configure.in:38: -1- _AM_SUBST_NOTMAKE([DEBUG_THREAD_FALSE])
+m4trace:configure.in:39: -1- AM_CONDITIONAL([DEBUG_XML], [test "$debug" = "true"])
+m4trace:configure.in:39: -1- AC_PREREQ([2.52])
+m4trace:configure.in:39: -1- AC_SUBST([DEBUG_XML_TRUE])
+m4trace:configure.in:39: -1- AC_SUBST_TRACE([DEBUG_XML_TRUE])
+m4trace:configure.in:39: -1- m4_pattern_allow([^DEBUG_XML_TRUE$])
+m4trace:configure.in:39: -1- AC_SUBST([DEBUG_XML_FALSE])
+m4trace:configure.in:39: -1- AC_SUBST_TRACE([DEBUG_XML_FALSE])
+m4trace:configure.in:39: -1- m4_pattern_allow([^DEBUG_XML_FALSE$])
+m4trace:configure.in:39: -1- _AM_SUBST_NOTMAKE([DEBUG_XML_TRUE])
+m4trace:configure.in:39: -1- _AM_SUBST_NOTMAKE([DEBUG_XML_FALSE])
+m4trace:configure.in:42: -1- AC_FUNC_SELECT_ARGTYPES
+m4trace:configure.in:42: -1- AC_CHECK_HEADERS([sys/select.h sys/socket.h])
+m4trace:configure.in:42: -1- AH_OUTPUT([HAVE_SYS_SELECT_H], [/* Define to 1 if you have the <sys/select.h> header file. */
 #undef HAVE_SYS_SELECT_H])
-m4trace:configure.in:30: -1- AH_OUTPUT([HAVE_SYS_SOCKET_H], [/* Define to 1 if you have the <sys/socket.h> header file. */
+m4trace:configure.in:42: -1- AH_OUTPUT([HAVE_SYS_SOCKET_H], [/* Define to 1 if you have the <sys/socket.h> header file. */
 #undef HAVE_SYS_SOCKET_H])
-m4trace:configure.in:30: -1- AC_DEFINE_TRACE_LITERAL([SELECT_TYPE_ARG1])
-m4trace:configure.in:30: -1- m4_pattern_allow([^SELECT_TYPE_ARG1$])
-m4trace:configure.in:30: -1- AH_OUTPUT([SELECT_TYPE_ARG1], [/* Define to the type of arg 1 for `select\'. */
+m4trace:configure.in:42: -1- AC_DEFINE_TRACE_LITERAL([SELECT_TYPE_ARG1])
+m4trace:configure.in:42: -1- m4_pattern_allow([^SELECT_TYPE_ARG1$])
+m4trace:configure.in:42: -1- AH_OUTPUT([SELECT_TYPE_ARG1], [/* Define to the type of arg 1 for `select\'. */
 #undef SELECT_TYPE_ARG1])
-m4trace:configure.in:30: -1- AC_DEFINE_TRACE_LITERAL([SELECT_TYPE_ARG234])
-m4trace:configure.in:30: -1- m4_pattern_allow([^SELECT_TYPE_ARG234$])
-m4trace:configure.in:30: -1- AH_OUTPUT([SELECT_TYPE_ARG234], [/* Define to the type of args 2, 3 and 4 for `select\'. */
+m4trace:configure.in:42: -1- AC_DEFINE_TRACE_LITERAL([SELECT_TYPE_ARG234])
+m4trace:configure.in:42: -1- m4_pattern_allow([^SELECT_TYPE_ARG234$])
+m4trace:configure.in:42: -1- AH_OUTPUT([SELECT_TYPE_ARG234], [/* Define to the type of args 2, 3 and 4 for `select\'. */
 #undef SELECT_TYPE_ARG234])
-m4trace:configure.in:30: -1- AC_DEFINE_TRACE_LITERAL([SELECT_TYPE_ARG5])
-m4trace:configure.in:30: -1- m4_pattern_allow([^SELECT_TYPE_ARG5$])
-m4trace:configure.in:30: -1- AH_OUTPUT([SELECT_TYPE_ARG5], [/* Define to the type of arg 5 for `select\'. */
+m4trace:configure.in:42: -1- AC_DEFINE_TRACE_LITERAL([SELECT_TYPE_ARG5])
+m4trace:configure.in:42: -1- m4_pattern_allow([^SELECT_TYPE_ARG5$])
+m4trace:configure.in:42: -1- AH_OUTPUT([SELECT_TYPE_ARG5], [/* Define to the type of arg 5 for `select\'. */
 #undef SELECT_TYPE_ARG5])
-m4trace:configure.in:31: -1- AC_TYPE_SIGNAL
-m4trace:configure.in:31: -1- AC_DEFINE_TRACE_LITERAL([RETSIGTYPE])
-m4trace:configure.in:31: -1- m4_pattern_allow([^RETSIGTYPE$])
-m4trace:configure.in:31: -1- AH_OUTPUT([RETSIGTYPE], [/* Define as the return type of signal handlers (`int\' or `void\'). */
+m4trace:configure.in:43: -1- AC_TYPE_SIGNAL
+m4trace:configure.in:43: -1- AC_DEFINE_TRACE_LITERAL([RETSIGTYPE])
+m4trace:configure.in:43: -1- m4_pattern_allow([^RETSIGTYPE$])
+m4trace:configure.in:43: -1- AH_OUTPUT([RETSIGTYPE], [/* Define as the return type of signal handlers (`int\' or `void\'). */
 #undef RETSIGTYPE])
-m4trace:configure.in:32: -1- AC_CHECK_FUNCS([bzero memmove select socket strchr])
-m4trace:configure.in:32: -1- AH_OUTPUT([HAVE_BZERO], [/* Define to 1 if you have the `bzero\' function. */
+m4trace:configure.in:44: -1- AC_CHECK_FUNCS([bzero memmove select socket strchr])
+m4trace:configure.in:44: -1- AH_OUTPUT([HAVE_BZERO], [/* Define to 1 if you have the `bzero\' function. */
 #undef HAVE_BZERO])
-m4trace:configure.in:32: -1- AH_OUTPUT([HAVE_MEMMOVE], [/* Define to 1 if you have the `memmove\' function. */
+m4trace:configure.in:44: -1- AH_OUTPUT([HAVE_MEMMOVE], [/* Define to 1 if you have the `memmove\' function. */
 #undef HAVE_MEMMOVE])
-m4trace:configure.in:32: -1- AH_OUTPUT([HAVE_SELECT], [/* Define to 1 if you have the `select\' function. */
+m4trace:configure.in:44: -1- AH_OUTPUT([HAVE_SELECT], [/* Define to 1 if you have the `select\' function. */
 #undef HAVE_SELECT])
-m4trace:configure.in:32: -1- AH_OUTPUT([HAVE_SOCKET], [/* Define to 1 if you have the `socket\' function. */
+m4trace:configure.in:44: -1- AH_OUTPUT([HAVE_SOCKET], [/* Define to 1 if you have the `socket\' function. */
 #undef HAVE_SOCKET])
-m4trace:configure.in:32: -1- AH_OUTPUT([HAVE_STRCHR], [/* Define to 1 if you have the `strchr\' function. */
+m4trace:configure.in:44: -1- AH_OUTPUT([HAVE_STRCHR], [/* Define to 1 if you have the `strchr\' function. */
 #undef HAVE_STRCHR])
-m4trace:configure.in:35: -1- AC_CONFIG_FILES([Makefile
+m4trace:configure.in:47: -1- AC_CONFIG_FILES([Makefile
 			client/Makefile
 			src/communication/Makefile
 			src/threadpool/Makefile
 			src/tinyxml/Makefile])
-m4trace:configure.in:35: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
+m4trace:configure.in:47: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
 You should run autoupdate.], [])
-m4trace:configure.in:35: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
-m4trace:configure.in:35: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.in:35: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([LTLIBOBJS])
-m4trace:configure.in:35: -1- m4_pattern_allow([^LTLIBOBJS$])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([top_builddir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([srcdir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([abs_srcdir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([top_srcdir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([abs_top_srcdir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([builddir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([abs_builddir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([abs_top_builddir])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([INSTALL])
-m4trace:configure.in:35: -1- AC_SUBST_TRACE([MKDIR_P])
+m4trace:configure.in:47: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
+m4trace:configure.in:47: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.in:47: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([LTLIBOBJS])
+m4trace:configure.in:47: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([top_builddir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([srcdir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([abs_srcdir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([top_srcdir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([abs_top_srcdir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([builddir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([abs_builddir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([abs_top_builddir])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([INSTALL])
+m4trace:configure.in:47: -1- AC_SUBST_TRACE([MKDIR_P])
