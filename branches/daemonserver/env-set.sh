@@ -21,5 +21,3 @@ if [ -d "src" ]; then
 else
 	echo "src checking ....failed!"
 fi
-
-echo "Done!"

@@ -1,7 +1,7 @@
 #ifndef _DEBUG_THREAD_H_
 #define _DEBUG_THREAD_H_
 
-//#define DEBUG_THREAD
+#define DEBUG_THREAD
 #ifdef DEBUG_THREAD
     #include <iostream>
     using namespace std;

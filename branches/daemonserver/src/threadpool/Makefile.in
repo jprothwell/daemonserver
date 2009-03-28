@@ -40,19 +40,12 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
-am_libthreadpool_so_OBJECTS = libthreadpool_so-CBuilder.$(OBJEXT) \
-	libthreadpool_so-CInvoker.$(OBJEXT) \
-	libthreadpool_so-CThreadPool.$(OBJEXT) \
-	libthreadpool_so-CCommand.$(OBJEXT) \
-	libthreadpool_so-CJob.$(OBJEXT) \
-	libthreadpool_so-CThreadPoolWork.$(OBJEXT) \
-	libthreadpool_so-CCommandJob.$(OBJEXT) \
-	libthreadpool_so-CThreadManager.$(OBJEXT) \
-	libthreadpool_so-CThreadPoolIdle.$(OBJEXT) \
-	libthreadpool_so-CCondPrivate.$(OBJEXT) \
-	libthreadpool_so-CThread.$(OBJEXT) \
-	libthreadpool_so-CMutexPrivate.$(OBJEXT) \
-	libthreadpool_so-CThreadPrivate.$(OBJEXT)
+am_libthreadpool_so_OBJECTS = CBuilder.$(OBJEXT) CInvoker.$(OBJEXT) \
+	CThreadPool.$(OBJEXT) CCommand.$(OBJEXT) CJob.$(OBJEXT) \
+	CThreadPoolWork.$(OBJEXT) CCommandJob.$(OBJEXT) \
+	CThreadManager.$(OBJEXT) CThreadPoolIdle.$(OBJEXT) \
+	CCondPrivate.$(OBJEXT) CThread.$(OBJEXT) \
+	CMutexPrivate.$(OBJEXT) CThreadPrivate.$(OBJEXT)
 libthreadpool_so_OBJECTS = $(am_libthreadpool_so_OBJECTS)
 libthreadpool_so_LDADD = $(LDADD)
 libthreadpool_so_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -189,9 +182,7 @@ libthreadpool_so_SOURCES = CBuilder.cpp \
 	thread/CMutexPrivate.h \
 	thread/CThreadPrivate.h
 
-libthreadpool_so_LDFLAGS = -g -Wall -fpic -shared 
-@DEBUG_THREAD_FALSE@libthreadpool_so_CPPFLAGS = 
-@DEBUG_THREAD_TRUE@libthreadpool_so_CPPFLAGS = -DDEBUG_THREAD -DDEBUG_THREAD_POOL
+libthreadpool_so_LDFLAGS = -g -Wall -fpic -shared
 all: all-am
 
 .SUFFIXES:
@@ -238,19 +229,19 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CBuilder.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CCommand.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CCommandJob.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CCondPrivate.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CInvoker.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CJob.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CMutexPrivate.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CThread.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CThreadManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CThreadPool.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CThreadPoolWork.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libthreadpool_so-CThreadPrivate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CBuilder.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CCommand.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CCommandJob.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CCondPrivate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CInvoker.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CJob.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CMutexPrivate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CThread.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CThreadManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CThreadPool.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CThreadPoolIdle.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CThreadPoolWork.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CThreadPrivate.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -266,187 +257,61 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
-libthreadpool_so-CBuilder.o: CBuilder.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CBuilder.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CBuilder.Tpo -c -o libthreadpool_so-CBuilder.o `test -f 'CBuilder.cpp' || echo '$(srcdir)/'`CBuilder.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CBuilder.Tpo $(DEPDIR)/libthreadpool_so-CBuilder.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CBuilder.cpp' object='libthreadpool_so-CBuilder.o' libtool=no @AMDEPBACKSLASH@
+CCondPrivate.o: thread/CCondPrivate.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CCondPrivate.o -MD -MP -MF $(DEPDIR)/CCondPrivate.Tpo -c -o CCondPrivate.o `test -f 'thread/CCondPrivate.cpp' || echo '$(srcdir)/'`thread/CCondPrivate.cpp
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CCondPrivate.Tpo $(DEPDIR)/CCondPrivate.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CCondPrivate.cpp' object='CCondPrivate.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CBuilder.o `test -f 'CBuilder.cpp' || echo '$(srcdir)/'`CBuilder.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CCondPrivate.o `test -f 'thread/CCondPrivate.cpp' || echo '$(srcdir)/'`thread/CCondPrivate.cpp
 
-libthreadpool_so-CBuilder.obj: CBuilder.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CBuilder.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CBuilder.Tpo -c -o libthreadpool_so-CBuilder.obj `if test -f 'CBuilder.cpp'; then $(CYGPATH_W) 'CBuilder.cpp'; else $(CYGPATH_W) '$(srcdir)/CBuilder.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CBuilder.Tpo $(DEPDIR)/libthreadpool_so-CBuilder.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CBuilder.cpp' object='libthreadpool_so-CBuilder.obj' libtool=no @AMDEPBACKSLASH@
+CCondPrivate.obj: thread/CCondPrivate.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CCondPrivate.obj -MD -MP -MF $(DEPDIR)/CCondPrivate.Tpo -c -o CCondPrivate.obj `if test -f 'thread/CCondPrivate.cpp'; then $(CYGPATH_W) 'thread/CCondPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CCondPrivate.cpp'; fi`
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CCondPrivate.Tpo $(DEPDIR)/CCondPrivate.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CCondPrivate.cpp' object='CCondPrivate.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CBuilder.obj `if test -f 'CBuilder.cpp'; then $(CYGPATH_W) 'CBuilder.cpp'; else $(CYGPATH_W) '$(srcdir)/CBuilder.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CCondPrivate.obj `if test -f 'thread/CCondPrivate.cpp'; then $(CYGPATH_W) 'thread/CCondPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CCondPrivate.cpp'; fi`
 
-libthreadpool_so-CInvoker.o: CInvoker.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CInvoker.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CInvoker.Tpo -c -o libthreadpool_so-CInvoker.o `test -f 'CInvoker.cpp' || echo '$(srcdir)/'`CInvoker.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CInvoker.Tpo $(DEPDIR)/libthreadpool_so-CInvoker.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CInvoker.cpp' object='libthreadpool_so-CInvoker.o' libtool=no @AMDEPBACKSLASH@
+CThread.o: thread/CThread.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CThread.o -MD -MP -MF $(DEPDIR)/CThread.Tpo -c -o CThread.o `test -f 'thread/CThread.cpp' || echo '$(srcdir)/'`thread/CThread.cpp
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CThread.Tpo $(DEPDIR)/CThread.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThread.cpp' object='CThread.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CInvoker.o `test -f 'CInvoker.cpp' || echo '$(srcdir)/'`CInvoker.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CThread.o `test -f 'thread/CThread.cpp' || echo '$(srcdir)/'`thread/CThread.cpp
 
-libthreadpool_so-CInvoker.obj: CInvoker.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CInvoker.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CInvoker.Tpo -c -o libthreadpool_so-CInvoker.obj `if test -f 'CInvoker.cpp'; then $(CYGPATH_W) 'CInvoker.cpp'; else $(CYGPATH_W) '$(srcdir)/CInvoker.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CInvoker.Tpo $(DEPDIR)/libthreadpool_so-CInvoker.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CInvoker.cpp' object='libthreadpool_so-CInvoker.obj' libtool=no @AMDEPBACKSLASH@
+CThread.obj: thread/CThread.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CThread.obj -MD -MP -MF $(DEPDIR)/CThread.Tpo -c -o CThread.obj `if test -f 'thread/CThread.cpp'; then $(CYGPATH_W) 'thread/CThread.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThread.cpp'; fi`
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CThread.Tpo $(DEPDIR)/CThread.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThread.cpp' object='CThread.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CInvoker.obj `if test -f 'CInvoker.cpp'; then $(CYGPATH_W) 'CInvoker.cpp'; else $(CYGPATH_W) '$(srcdir)/CInvoker.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CThread.obj `if test -f 'thread/CThread.cpp'; then $(CYGPATH_W) 'thread/CThread.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThread.cpp'; fi`
 
-libthreadpool_so-CThreadPool.o: CThreadPool.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPool.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPool.Tpo -c -o libthreadpool_so-CThreadPool.o `test -f 'CThreadPool.cpp' || echo '$(srcdir)/'`CThreadPool.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPool.Tpo $(DEPDIR)/libthreadpool_so-CThreadPool.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadPool.cpp' object='libthreadpool_so-CThreadPool.o' libtool=no @AMDEPBACKSLASH@
+CMutexPrivate.o: thread/CMutexPrivate.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CMutexPrivate.o -MD -MP -MF $(DEPDIR)/CMutexPrivate.Tpo -c -o CMutexPrivate.o `test -f 'thread/CMutexPrivate.cpp' || echo '$(srcdir)/'`thread/CMutexPrivate.cpp
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CMutexPrivate.Tpo $(DEPDIR)/CMutexPrivate.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CMutexPrivate.cpp' object='CMutexPrivate.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPool.o `test -f 'CThreadPool.cpp' || echo '$(srcdir)/'`CThreadPool.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CMutexPrivate.o `test -f 'thread/CMutexPrivate.cpp' || echo '$(srcdir)/'`thread/CMutexPrivate.cpp
 
-libthreadpool_so-CThreadPool.obj: CThreadPool.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPool.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPool.Tpo -c -o libthreadpool_so-CThreadPool.obj `if test -f 'CThreadPool.cpp'; then $(CYGPATH_W) 'CThreadPool.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadPool.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPool.Tpo $(DEPDIR)/libthreadpool_so-CThreadPool.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadPool.cpp' object='libthreadpool_so-CThreadPool.obj' libtool=no @AMDEPBACKSLASH@
+CMutexPrivate.obj: thread/CMutexPrivate.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CMutexPrivate.obj -MD -MP -MF $(DEPDIR)/CMutexPrivate.Tpo -c -o CMutexPrivate.obj `if test -f 'thread/CMutexPrivate.cpp'; then $(CYGPATH_W) 'thread/CMutexPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CMutexPrivate.cpp'; fi`
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CMutexPrivate.Tpo $(DEPDIR)/CMutexPrivate.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CMutexPrivate.cpp' object='CMutexPrivate.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPool.obj `if test -f 'CThreadPool.cpp'; then $(CYGPATH_W) 'CThreadPool.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadPool.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CMutexPrivate.obj `if test -f 'thread/CMutexPrivate.cpp'; then $(CYGPATH_W) 'thread/CMutexPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CMutexPrivate.cpp'; fi`
 
-libthreadpool_so-CCommand.o: CCommand.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CCommand.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CCommand.Tpo -c -o libthreadpool_so-CCommand.o `test -f 'CCommand.cpp' || echo '$(srcdir)/'`CCommand.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CCommand.Tpo $(DEPDIR)/libthreadpool_so-CCommand.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CCommand.cpp' object='libthreadpool_so-CCommand.o' libtool=no @AMDEPBACKSLASH@
+CThreadPrivate.o: thread/CThreadPrivate.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CThreadPrivate.o -MD -MP -MF $(DEPDIR)/CThreadPrivate.Tpo -c -o CThreadPrivate.o `test -f 'thread/CThreadPrivate.cpp' || echo '$(srcdir)/'`thread/CThreadPrivate.cpp
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CThreadPrivate.Tpo $(DEPDIR)/CThreadPrivate.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThreadPrivate.cpp' object='CThreadPrivate.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CCommand.o `test -f 'CCommand.cpp' || echo '$(srcdir)/'`CCommand.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CThreadPrivate.o `test -f 'thread/CThreadPrivate.cpp' || echo '$(srcdir)/'`thread/CThreadPrivate.cpp
 
-libthreadpool_so-CCommand.obj: CCommand.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CCommand.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CCommand.Tpo -c -o libthreadpool_so-CCommand.obj `if test -f 'CCommand.cpp'; then $(CYGPATH_W) 'CCommand.cpp'; else $(CYGPATH_W) '$(srcdir)/CCommand.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CCommand.Tpo $(DEPDIR)/libthreadpool_so-CCommand.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CCommand.cpp' object='libthreadpool_so-CCommand.obj' libtool=no @AMDEPBACKSLASH@
+CThreadPrivate.obj: thread/CThreadPrivate.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CThreadPrivate.obj -MD -MP -MF $(DEPDIR)/CThreadPrivate.Tpo -c -o CThreadPrivate.obj `if test -f 'thread/CThreadPrivate.cpp'; then $(CYGPATH_W) 'thread/CThreadPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThreadPrivate.cpp'; fi`
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/CThreadPrivate.Tpo $(DEPDIR)/CThreadPrivate.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThreadPrivate.cpp' object='CThreadPrivate.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CCommand.obj `if test -f 'CCommand.cpp'; then $(CYGPATH_W) 'CCommand.cpp'; else $(CYGPATH_W) '$(srcdir)/CCommand.cpp'; fi`
-
-libthreadpool_so-CJob.o: CJob.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CJob.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CJob.Tpo -c -o libthreadpool_so-CJob.o `test -f 'CJob.cpp' || echo '$(srcdir)/'`CJob.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CJob.Tpo $(DEPDIR)/libthreadpool_so-CJob.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CJob.cpp' object='libthreadpool_so-CJob.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CJob.o `test -f 'CJob.cpp' || echo '$(srcdir)/'`CJob.cpp
-
-libthreadpool_so-CJob.obj: CJob.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CJob.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CJob.Tpo -c -o libthreadpool_so-CJob.obj `if test -f 'CJob.cpp'; then $(CYGPATH_W) 'CJob.cpp'; else $(CYGPATH_W) '$(srcdir)/CJob.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CJob.Tpo $(DEPDIR)/libthreadpool_so-CJob.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CJob.cpp' object='libthreadpool_so-CJob.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CJob.obj `if test -f 'CJob.cpp'; then $(CYGPATH_W) 'CJob.cpp'; else $(CYGPATH_W) '$(srcdir)/CJob.cpp'; fi`
-
-libthreadpool_so-CThreadPoolWork.o: CThreadPoolWork.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPoolWork.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPoolWork.Tpo -c -o libthreadpool_so-CThreadPoolWork.o `test -f 'CThreadPoolWork.cpp' || echo '$(srcdir)/'`CThreadPoolWork.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPoolWork.Tpo $(DEPDIR)/libthreadpool_so-CThreadPoolWork.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadPoolWork.cpp' object='libthreadpool_so-CThreadPoolWork.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPoolWork.o `test -f 'CThreadPoolWork.cpp' || echo '$(srcdir)/'`CThreadPoolWork.cpp
-
-libthreadpool_so-CThreadPoolWork.obj: CThreadPoolWork.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPoolWork.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPoolWork.Tpo -c -o libthreadpool_so-CThreadPoolWork.obj `if test -f 'CThreadPoolWork.cpp'; then $(CYGPATH_W) 'CThreadPoolWork.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadPoolWork.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPoolWork.Tpo $(DEPDIR)/libthreadpool_so-CThreadPoolWork.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadPoolWork.cpp' object='libthreadpool_so-CThreadPoolWork.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPoolWork.obj `if test -f 'CThreadPoolWork.cpp'; then $(CYGPATH_W) 'CThreadPoolWork.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadPoolWork.cpp'; fi`
-
-libthreadpool_so-CCommandJob.o: CCommandJob.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CCommandJob.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CCommandJob.Tpo -c -o libthreadpool_so-CCommandJob.o `test -f 'CCommandJob.cpp' || echo '$(srcdir)/'`CCommandJob.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CCommandJob.Tpo $(DEPDIR)/libthreadpool_so-CCommandJob.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CCommandJob.cpp' object='libthreadpool_so-CCommandJob.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CCommandJob.o `test -f 'CCommandJob.cpp' || echo '$(srcdir)/'`CCommandJob.cpp
-
-libthreadpool_so-CCommandJob.obj: CCommandJob.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CCommandJob.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CCommandJob.Tpo -c -o libthreadpool_so-CCommandJob.obj `if test -f 'CCommandJob.cpp'; then $(CYGPATH_W) 'CCommandJob.cpp'; else $(CYGPATH_W) '$(srcdir)/CCommandJob.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CCommandJob.Tpo $(DEPDIR)/libthreadpool_so-CCommandJob.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CCommandJob.cpp' object='libthreadpool_so-CCommandJob.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CCommandJob.obj `if test -f 'CCommandJob.cpp'; then $(CYGPATH_W) 'CCommandJob.cpp'; else $(CYGPATH_W) '$(srcdir)/CCommandJob.cpp'; fi`
-
-libthreadpool_so-CThreadManager.o: CThreadManager.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadManager.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadManager.Tpo -c -o libthreadpool_so-CThreadManager.o `test -f 'CThreadManager.cpp' || echo '$(srcdir)/'`CThreadManager.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadManager.Tpo $(DEPDIR)/libthreadpool_so-CThreadManager.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadManager.cpp' object='libthreadpool_so-CThreadManager.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadManager.o `test -f 'CThreadManager.cpp' || echo '$(srcdir)/'`CThreadManager.cpp
-
-libthreadpool_so-CThreadManager.obj: CThreadManager.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadManager.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadManager.Tpo -c -o libthreadpool_so-CThreadManager.obj `if test -f 'CThreadManager.cpp'; then $(CYGPATH_W) 'CThreadManager.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadManager.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadManager.Tpo $(DEPDIR)/libthreadpool_so-CThreadManager.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadManager.cpp' object='libthreadpool_so-CThreadManager.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadManager.obj `if test -f 'CThreadManager.cpp'; then $(CYGPATH_W) 'CThreadManager.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadManager.cpp'; fi`
-
-libthreadpool_so-CThreadPoolIdle.o: CThreadPoolIdle.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPoolIdle.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Tpo -c -o libthreadpool_so-CThreadPoolIdle.o `test -f 'CThreadPoolIdle.cpp' || echo '$(srcdir)/'`CThreadPoolIdle.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Tpo $(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadPoolIdle.cpp' object='libthreadpool_so-CThreadPoolIdle.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPoolIdle.o `test -f 'CThreadPoolIdle.cpp' || echo '$(srcdir)/'`CThreadPoolIdle.cpp
-
-libthreadpool_so-CThreadPoolIdle.obj: CThreadPoolIdle.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPoolIdle.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Tpo -c -o libthreadpool_so-CThreadPoolIdle.obj `if test -f 'CThreadPoolIdle.cpp'; then $(CYGPATH_W) 'CThreadPoolIdle.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadPoolIdle.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Tpo $(DEPDIR)/libthreadpool_so-CThreadPoolIdle.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='CThreadPoolIdle.cpp' object='libthreadpool_so-CThreadPoolIdle.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPoolIdle.obj `if test -f 'CThreadPoolIdle.cpp'; then $(CYGPATH_W) 'CThreadPoolIdle.cpp'; else $(CYGPATH_W) '$(srcdir)/CThreadPoolIdle.cpp'; fi`
-
-libthreadpool_so-CCondPrivate.o: thread/CCondPrivate.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CCondPrivate.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CCondPrivate.Tpo -c -o libthreadpool_so-CCondPrivate.o `test -f 'thread/CCondPrivate.cpp' || echo '$(srcdir)/'`thread/CCondPrivate.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CCondPrivate.Tpo $(DEPDIR)/libthreadpool_so-CCondPrivate.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CCondPrivate.cpp' object='libthreadpool_so-CCondPrivate.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CCondPrivate.o `test -f 'thread/CCondPrivate.cpp' || echo '$(srcdir)/'`thread/CCondPrivate.cpp
-
-libthreadpool_so-CCondPrivate.obj: thread/CCondPrivate.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CCondPrivate.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CCondPrivate.Tpo -c -o libthreadpool_so-CCondPrivate.obj `if test -f 'thread/CCondPrivate.cpp'; then $(CYGPATH_W) 'thread/CCondPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CCondPrivate.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CCondPrivate.Tpo $(DEPDIR)/libthreadpool_so-CCondPrivate.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CCondPrivate.cpp' object='libthreadpool_so-CCondPrivate.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CCondPrivate.obj `if test -f 'thread/CCondPrivate.cpp'; then $(CYGPATH_W) 'thread/CCondPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CCondPrivate.cpp'; fi`
-
-libthreadpool_so-CThread.o: thread/CThread.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThread.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThread.Tpo -c -o libthreadpool_so-CThread.o `test -f 'thread/CThread.cpp' || echo '$(srcdir)/'`thread/CThread.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThread.Tpo $(DEPDIR)/libthreadpool_so-CThread.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThread.cpp' object='libthreadpool_so-CThread.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThread.o `test -f 'thread/CThread.cpp' || echo '$(srcdir)/'`thread/CThread.cpp
-
-libthreadpool_so-CThread.obj: thread/CThread.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThread.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThread.Tpo -c -o libthreadpool_so-CThread.obj `if test -f 'thread/CThread.cpp'; then $(CYGPATH_W) 'thread/CThread.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThread.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThread.Tpo $(DEPDIR)/libthreadpool_so-CThread.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThread.cpp' object='libthreadpool_so-CThread.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThread.obj `if test -f 'thread/CThread.cpp'; then $(CYGPATH_W) 'thread/CThread.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThread.cpp'; fi`
-
-libthreadpool_so-CMutexPrivate.o: thread/CMutexPrivate.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CMutexPrivate.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CMutexPrivate.Tpo -c -o libthreadpool_so-CMutexPrivate.o `test -f 'thread/CMutexPrivate.cpp' || echo '$(srcdir)/'`thread/CMutexPrivate.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CMutexPrivate.Tpo $(DEPDIR)/libthreadpool_so-CMutexPrivate.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CMutexPrivate.cpp' object='libthreadpool_so-CMutexPrivate.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CMutexPrivate.o `test -f 'thread/CMutexPrivate.cpp' || echo '$(srcdir)/'`thread/CMutexPrivate.cpp
-
-libthreadpool_so-CMutexPrivate.obj: thread/CMutexPrivate.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CMutexPrivate.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CMutexPrivate.Tpo -c -o libthreadpool_so-CMutexPrivate.obj `if test -f 'thread/CMutexPrivate.cpp'; then $(CYGPATH_W) 'thread/CMutexPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CMutexPrivate.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CMutexPrivate.Tpo $(DEPDIR)/libthreadpool_so-CMutexPrivate.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CMutexPrivate.cpp' object='libthreadpool_so-CMutexPrivate.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CMutexPrivate.obj `if test -f 'thread/CMutexPrivate.cpp'; then $(CYGPATH_W) 'thread/CMutexPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CMutexPrivate.cpp'; fi`
-
-libthreadpool_so-CThreadPrivate.o: thread/CThreadPrivate.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPrivate.o -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPrivate.Tpo -c -o libthreadpool_so-CThreadPrivate.o `test -f 'thread/CThreadPrivate.cpp' || echo '$(srcdir)/'`thread/CThreadPrivate.cpp
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPrivate.Tpo $(DEPDIR)/libthreadpool_so-CThreadPrivate.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThreadPrivate.cpp' object='libthreadpool_so-CThreadPrivate.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPrivate.o `test -f 'thread/CThreadPrivate.cpp' || echo '$(srcdir)/'`thread/CThreadPrivate.cpp
-
-libthreadpool_so-CThreadPrivate.obj: thread/CThreadPrivate.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libthreadpool_so-CThreadPrivate.obj -MD -MP -MF $(DEPDIR)/libthreadpool_so-CThreadPrivate.Tpo -c -o libthreadpool_so-CThreadPrivate.obj `if test -f 'thread/CThreadPrivate.cpp'; then $(CYGPATH_W) 'thread/CThreadPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThreadPrivate.cpp'; fi`
-@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/libthreadpool_so-CThreadPrivate.Tpo $(DEPDIR)/libthreadpool_so-CThreadPrivate.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='thread/CThreadPrivate.cpp' object='libthreadpool_so-CThreadPrivate.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libthreadpool_so_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libthreadpool_so-CThreadPrivate.obj `if test -f 'thread/CThreadPrivate.cpp'; then $(CYGPATH_W) 'thread/CThreadPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThreadPrivate.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CThreadPrivate.obj `if test -f 'thread/CThreadPrivate.cpp'; then $(CYGPATH_W) 'thread/CThreadPrivate.cpp'; else $(CYGPATH_W) '$(srcdir)/thread/CThreadPrivate.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
