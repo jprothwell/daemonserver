@@ -700,6 +700,12 @@ RANLIB
 CPP
 GREP
 EGREP
+DEBUG_MAIN_TRUE
+DEBUG_MAIN_FALSE
+DEBUG_THREAD_TRUE
+DEBUG_THREAD_FALSE
+DEBUG_XML_TRUE
+DEBUG_XML_FALSE
 LIBOBJS
 LTLIBOBJS'
 ac_subst_files=''
@@ -1292,6 +1298,9 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
+ --enable-debug
+ --enable-debugthread
+ --enable-debugxml
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -5224,6 +5233,66 @@ _ACEOF
 fi
 
 
+# Check whether --enable-debug was given.
+if test "${enable_debug+set}" = set; then
+  enableval=$enable_debug;  if test "${enableval}" = "yes"; then
+		debug=true
+	  else
+		debug=false
+	  fi
+else
+   debug=false
+fi
+
+ if test "$debug" = "true"; then
+  DEBUG_MAIN_TRUE=
+  DEBUG_MAIN_FALSE='#'
+else
+  DEBUG_MAIN_TRUE='#'
+  DEBUG_MAIN_FALSE=
+fi
+
+
+# Check whether --enable-debugthread was given.
+if test "${enable_debugthread+set}" = set; then
+  enableval=$enable_debugthread;  if test "${enableval}" = "yes"; then
+		debugthread=true
+	  else
+		debugthread=false
+	  fi
+else
+   debugthread=false
+fi
+
+ if test "$debugthread" = "true"; then
+  DEBUG_THREAD_TRUE=
+  DEBUG_THREAD_FALSE='#'
+else
+  DEBUG_THREAD_TRUE='#'
+  DEBUG_THREAD_FALSE=
+fi
+
+
+# Check whether --enable-debugthread was given.
+if test "${enable_debugthread+set}" = set; then
+  enableval=$enable_debugthread;  if test "${enableval}" = "yes"; then
+		debugxml=true
+	  else
+		debugxml=false
+	  fi
+else
+   debugxml=false
+fi
+
+ if test "$debugxml" = "true"; then
+  DEBUG_XML_TRUE=
+  DEBUG_XML_FALSE='#'
+else
+  DEBUG_XML_TRUE='#'
+  DEBUG_XML_FALSE=
+fi
+
+
 # Checks for library functions.
 
 
@@ -5762,6 +5831,27 @@ if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${DEBUG_MAIN_TRUE}" && test -z "${DEBUG_MAIN_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"DEBUG_MAIN\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"DEBUG_MAIN\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${DEBUG_THREAD_TRUE}" && test -z "${DEBUG_THREAD_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"DEBUG_THREAD\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"DEBUG_THREAD\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${DEBUG_XML_TRUE}" && test -z "${DEBUG_XML_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"DEBUG_XML\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"DEBUG_XML\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -6369,11 +6459,17 @@ RANLIB!$RANLIB$ac_delim
 CPP!$CPP$ac_delim
 GREP!$GREP$ac_delim
 EGREP!$EGREP$ac_delim
+DEBUG_MAIN_TRUE!$DEBUG_MAIN_TRUE$ac_delim
+DEBUG_MAIN_FALSE!$DEBUG_MAIN_FALSE$ac_delim
+DEBUG_THREAD_TRUE!$DEBUG_THREAD_TRUE$ac_delim
+DEBUG_THREAD_FALSE!$DEBUG_THREAD_FALSE$ac_delim
+DEBUG_XML_TRUE!$DEBUG_XML_TRUE$ac_delim
+DEBUG_XML_FALSE!$DEBUG_XML_FALSE$ac_delim
 LIBOBJS!$LIBOBJS$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 87; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 93; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5

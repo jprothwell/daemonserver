@@ -23,7 +23,6 @@ using namespace std;
 #define LOGMAIN(msg)
 #endif
 
-//#include "tinyxml.h"
 #include "xml_op.h"
 const string CONFIG_FILE( "./config/set.xml" );
 #define DEFAULT_PORT 9000
@@ -225,8 +224,6 @@ CShm* getShm()
     else
 	{
         LOGMAIN("shm id = "<<gShm->getID());
-    	//char* p = (char*)(pShm->getAddr());
-    	//LOGMAIN("The attchment address is :" << p);
 	}
 
 	return gShm;
