@@ -28,3 +28,10 @@ libthreadpool_so_SOURCES = CBuilder.cpp \
 	thread/CThreadPrivate.h
 libthreadpool_so_LDFLAGS = -g -Wall -fpic -shared
 LIBS = -lpthread
+
+if DEBUG_THREAD
+libthreadpool_so_CPPFLAGS = -DDEBUG_THREAD_POOL -DDEBUG_THREAD
+else
+libthreadpool_so_CPPFLAGS = 
+endif
+
