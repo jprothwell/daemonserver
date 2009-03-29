@@ -9,3 +9,10 @@ daemonserver_SOURCES = main.cpp
 daemonserver_LDADD = -L$(top_srcdir)/src/threadpool -L$(top_srcdir)/src/communication -L$(top_srcdir)/src/tinyxml
 daemonserver_LDFLAGS = -g -Wall 
 LIBS = -lpthread -lsocket -lxmlcore -lthreadpool
+
+if DEBUG_MAIN
+daemonserver_CPPFLAGS = -DDEBUG_MAIN
+else
+daemonserver_CPPFLAGS =
+endif
+

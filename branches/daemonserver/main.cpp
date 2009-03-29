@@ -15,7 +15,8 @@
 #include <string>
 using namespace std;
 
-#define DEBUG_MAIN
+//open the log using the configure
+//#define DEBUG_MAIN
 
 #ifdef DEBUG_MAIN
 #define LOGMAIN(msg) cout<<msg<<endl;

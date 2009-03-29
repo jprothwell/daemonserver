@@ -46,7 +46,7 @@ AC_ARG_ENABLE(debugthread,
 	[ debugthread=false ])
 AM_CONDITIONAL(DEBUG_THREAD, test "$debugthread" = "true")
 
-AC_ARG_ENABLE(debugthread,
+AC_ARG_ENABLE(debugxml,
 	[ --enable-debugxml ],
 	[ if test "${enableval}" = "yes"; then
 		debugxml=true
