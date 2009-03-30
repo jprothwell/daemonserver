@@ -17,7 +17,6 @@
 using namespace std;
 
 //open the log using the configure
-//#define DEBUG_MAIN
 
 #ifdef DEBUG_MAIN
 #define LOGMAIN(msg) do{ cout<<"Log main : "<<msg<<endl; }while(0)
@@ -90,7 +89,7 @@ void writeXML_To_Shm()
 {
     LOGMAIN("Begin write to shm");
 	CShm* pShm = getShm();
-	if( NULL!=pShm && -1!=pShm->getID() && NULL!=pShm->getAddr() )
+	if( NULL!=pShm && SHM_OK==pShm->shmStatus() )
 		(*pShm)<<XML;
 	
 	//save the current shm id for the next time used
@@ -229,7 +228,7 @@ CShm* getShm()
 		}
 		else
 		{
-			LOGMAIN("used a exist shm");
+			LOGMAIN("used a exist shm : "<<value);
 			gShm = new CShm( value, SHM_READ|SHM_WRITE );
 			if( gShm->getID()==-1 )
 			{
@@ -238,6 +237,11 @@ CShm* getShm()
 			}
 		}
 	}
+	
+	if( SHM_OK==gShm->shmStatus() )
+		LOGMAIN("SHM_OK");
+	else
+		LOGMAIN("SHM_ERROR");
 
     LOGMAIN("after create the cshm");
     if( NULL==gShm )
