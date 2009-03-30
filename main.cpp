@@ -13,20 +13,23 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <fstream>
 using namespace std;
 
 //open the log using the configure
 //#define DEBUG_MAIN
 
 #ifdef DEBUG_MAIN
-#define LOGMAIN(msg) cout<<msg<<endl;
+#define LOGMAIN(msg) do{ cout<<"Log main : "<<msg<<endl; }while(0)
 #else
-#define LOGMAIN(msg)
+#define LOGMAIN(msg) do{}while(0)
 #endif
 
 #include "xml_op.h"
 const string CONFIG_FILE( "./config/set.xml" );
 #define DEFAULT_PORT 9000
+
+const string SHM_CONFIG_FILE( "./config/shm.xml" );
 
 CShm* getShm();
 //////////////////////////////////////////////
@@ -60,7 +63,7 @@ int addAttr( const string elm, const string attr, const int value )
 #ifdef DEBUG_MAIN 
     //printf("attr XML : %s", XML);
 	getXML_op()->dumpXML( XML, 1024 );
-    printf("attr XML : %s", XML);
+	LOGMAIN("attr XML : "<<XML);
 #endif
     LOGMAIN("end add attr");
 
@@ -76,7 +79,7 @@ int addElement( const string elm )
     LOGMAIN("after add the element");
 #ifdef DEBUG_MAIN
 	getXML_op()->dumpXML( XML, 1024 );
-    printf("XML : %s\n", XML);
+	LOGMAIN("XML : "<<XML);
 #endif
     LOGMAIN("End add element");
 
@@ -88,7 +91,13 @@ void writeXML_To_Shm()
     LOGMAIN("Begin write to shm");
 	CShm* pShm = getShm();
 	if( NULL!=pShm && -1!=pShm->getID() && NULL!=pShm->getAddr() )
-		strcpy( (char*)pShm->getAddr(), XML );
+		(*pShm)<<XML;
+	
+	//save the current shm id for the next time used
+	fstream fopen( SHM_CONFIG_FILE.c_str(), fstream::in|fstream::out|fstream::trunc );
+
+	fopen<<XML;
+
     LOGMAIN("End write to shm");
 }
 ///////////////////////////////////////////
@@ -209,7 +218,26 @@ CShm* getShm()
 // create the share memory for the client and the server to communication
 	static CShm *gShm = NULL;
 	if( NULL==gShm )
-    	gShm = new CShm();
+	{
+		XML_op xml( SHM_CONFIG_FILE );
+		int value = -1;
+		bool attr = xml.getAttrValue( SHM_ID_ELEMENT, SHM_ID, value );
+		if( false==attr )
+		{
+			LOGMAIN("create a new shm");
+    		gShm = new CShm();
+		}
+		else
+		{
+			LOGMAIN("used a exist shm");
+			gShm = new CShm( value, SHM_READ|SHM_WRITE );
+			if( gShm->getID()==-1 )
+			{
+				LOGMAIN("the shmID in file is opened failed, create a new shm ");
+				gShm = new CShm();
+			}
+		}
+	}
 
     LOGMAIN("after create the cshm");
     if( NULL==gShm )

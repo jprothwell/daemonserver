@@ -4,6 +4,9 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <iostream>
+
+using namespace std;
 
 enum SHM_FLAGS
 {
@@ -22,9 +25,20 @@ public:
 
     bool destroy();
 
-    int getID(){ return mShmId; }
-    void* getAddr(){ return mpShmAddr; }
-    int getSize(){ return mShmSize; }
+    int getID() const { return mShmId; }
+    void* getAddr() const { return mpShmAddr; }
+    int getSize() const { return mShmSize; }
+
+	const CShm& operator <<( const char* str ) const
+	{
+		strcpy( (char*)this->getAddr(), str );
+		return *this;
+	}
+	const CShm& operator >>( char *input ) const
+	{
+		strcpy( input, (char*)this->getAddr() );
+		return *this;
+	}
 
 private:
     bool init( int id, int size, int flags );
@@ -37,6 +51,7 @@ private:
     shmid_ds* mpShmDs;
     int mFlags;
 };
+
 
 
 #endif
