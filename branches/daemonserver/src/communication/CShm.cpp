@@ -63,7 +63,7 @@ bool CShm::init( int id, int size, int flags )
         else// if( mFlags&SHM_OPEN ) the default is open
         {
             mpShmAddr = shmat( mShmId, 0, flag );
-            if( mpShmAddr<0 )
+            if( ((int)mpShmAddr)<0 )
             {
                 mShmId = -1;
                 return false;
