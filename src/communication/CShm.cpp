@@ -16,7 +16,7 @@ CShm::CShm( int id, int size, int flags )
 
 bool CShm::init( int id, int size, int flags )
 {
-    mpShmDs = new struct shmid_ds();
+    mpShmDs=new struct shmid_ds();
     if( -1==id )
     {
         //create a new shm
@@ -35,7 +35,7 @@ bool CShm::init( int id, int size, int flags )
             //the flag is right for the sys to create the shmid
             mShmSize = size;
             mFlags = flags;
-            mShmId = shmget( IPC_PRIVATE, mShmSize, IPC_CREAT|IPC_EXCL|0660 );
+            mShmId = shmget( IPC_PRIVATE, mShmSize, IPC_CREAT|IPC_EXCL|0600 );
             if( -1!=mShmId )
                 mpShmAddr = shmat( mShmId, 0, 0);
             
@@ -63,8 +63,10 @@ bool CShm::init( int id, int size, int flags )
         else// if( mFlags&SHM_OPEN ) the default is open
         {
             mpShmAddr = shmat( mShmId, 0, flag );
+			printf("attach addr is : %d", mpShmAddr );
             if( ((int)mpShmAddr)<0 )
             {
+				printf("attach the shm failed!\n");
                 mShmId = -1;
                 return false;
             }

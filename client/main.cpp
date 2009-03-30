@@ -155,7 +155,7 @@ int main( int argv, char** argc )
     sleep(5);
     int shareID = atoi( recvBuf );
     CShm* pShm = new CShm( shareID, 0 );
-    if( NULL!=pShm )
+    if( NULL!=pShm && SHM_OK==pShm->shmStatus() )
     {
         char* addr = (char*)pShm->getAddr();
         if( NULL!=addr )
@@ -165,7 +165,7 @@ int main( int argv, char** argc )
     }
     else
     {
-        printf("new shm failed\n");
+        printf("attach shm failed\n");
     }
     while(1)
         ;
