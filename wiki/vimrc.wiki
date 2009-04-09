@@ -2,21 +2,48 @@
 syntax on
 
 set autoindent
-
 set smartindent
 
 set tabstop=4
-
 set shiftwidth=4
 
 set vb t_vb=
 
 set ruler
-
 set incsearch
-
 set ignorecase
 
 color murphy
 
 set guifont=Lucida\ Console\ Semi-Condensed\ 12
+
+set tags=tags;/
+
+"using mouse
+set mouse=a
+
+" show the command
+set showcmd
+
+" Tlist的内部变量。函数列表。
+let Tlist_Use_Right_Window=1
+let Tlist_File_Fold_Auto_Close=1
+" 打开当前目录文件列表
+map <F5> :Explore<CR>
+" 函数和变量列表
+map <F6> :TlistToggle<CR>
+
+" 搜索当前词，并打开quickfix窗口
+map <F7> :call Search_Word()<CR>
+" " 全能补全
+inoremap <F8> <C-x><C-o>
+
+" step into
+map <F2> <C-]>
+" step out
+map <F3> <C-t>
+"map <F4> <\-m>
+
+" auto full the command under command pattern
+set wildmode=list:full
+set wildmenu 
