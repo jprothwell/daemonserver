@@ -25,17 +25,15 @@ set mouse=a
 " show the command
 set showcmd
 
-" Tlist的内部变量。函数列表。
 let Tlist_Use_Right_Window=1
 let Tlist_File_Fold_Auto_Close=1
-" 打开当前目录文件列表
+
 "map <F5> :Explore<CR>
-" 函数和变量列表
+
 "map <F6> :TlistToggle<CR>
 
-" 搜索当前词，并打开quickfix窗口
 "map <F7> :call Search_Word()<CR>
-" " 全能补全
+
 "inoremap <F8> <C-x><C-o>
 
 " step into
